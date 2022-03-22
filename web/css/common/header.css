@@ -1,0 +1,12 @@
+.header {
+	position: relative;
+	width: 100%;
+	height: 17em;
+}
+
+.logo {
+	position: relative;
+	width: 17em;
+	height: auto;
+	margin: 1em;
+}

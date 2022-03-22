@@ -1,0 +1,34 @@
+
+<!Doctype html>
+    <!--<%@ page contentType="text/html;charset=UTF-8" language="java" %>-->
+<html xmlns:color="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" type="text/css" href="../css/index.css">
+    <link rel="stylesheet" type="text/css" href="../css/common/header.css">
+    <link rel="stylesheet" type="text/css" href="../css/bona_nova.css">
+    <link rel="stylesheet" type="text/css" href="../css/manrope.css">
+
+    <title>Pixel</title>
+</head>
+<body class="body">
+    <div class="greetings_box">
+        <div class="header_start">
+            <div class="top_text">
+                Добро пожаловать в PixeL!
+            </div>
+        </div>
+    </div>
+
+    <div class=button_box>
+        <div class="logo_start">
+            <img src="../image/Pixel.png">
+        </div>
+        <form method="post">
+            <input type="submit" class="btn" id="btn_register" formaction="/pixel?command=register" value="Регистрация">
+            <input type="submit" class="btn" id="btn_login" formaction="/pixel?command=login" value="Войти">
+            <input type="submit" class="btn btn_about" id="btn_about" formaction="/pixel?command=about" value="Что такое PixeL">
+        </form>
+    </div>
+</body>
+</html>

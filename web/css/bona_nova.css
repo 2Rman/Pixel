@@ -1,0 +1,13 @@
+@font-face {
+	font-family: Bona Nova regular;
+	src:  url(../font/BonaNova-Regular.ttf);
+	font-weight: 400;
+	font-style: normal;
+}
+
+@font-face {
+	font-family: Bona Nova bold;
+	src:  url(../font/BonaNova-Bold.ttf);
+	font-weight: 700;
+	font-style: normal;
+}
