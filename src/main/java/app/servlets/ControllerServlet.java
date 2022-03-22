@@ -33,9 +33,9 @@ public class ControllerServlet extends HttpServlet {
         CommandDefineProcessor commandDefineProcessor = new CommandDefineProcessor();
 
         if (currentCommand != null) {
-            response.sendRedirect(commandDefineProcessor.defineCommand(currentCommand));
+            commandDefineProcessor.defineCommand(currentCommand).execute(request, response);
         } else {
-            RequestDispatcher requestDispatcher = request.getRequestDispatcher("view/index.html");
+            RequestDispatcher requestDispatcher = request.getRequestDispatcher("view/index.jsp");
             requestDispatcher.forward(request, response);
         }
 

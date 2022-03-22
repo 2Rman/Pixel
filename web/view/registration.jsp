@@ -1,4 +1,6 @@
 <!DOCTYPE html>
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%--<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>--%>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -15,23 +17,23 @@
             <img src="../image/Pixel.png" alt="PixeL">
         </div>
         <div class="form_container">
-            <form class="register_form" method="post" action="">
+            <form class="register_form" method="post" action="register">
                 <div class="text_box">
                     Как к Вам обращаться?
                 </div>
-                <input class="input_box" placeholder="Ваше имя">
+                <input class="input_box" type="text" placeholder="Ваше имя" name="username" autocomplete="off" onfocus="null">
                 <div class="text_box">
                     Ваш номер телефона
                 </div>
-                <input class="input_box" placeholder="+375 29 123 45 67">
+                <input class="input_box" type="text" placeholder="+375 29 123 45 67" autocomplete="off">
                 <div class="text_box">
                     Задайте пароль
                 </div>
-                <input class="input_box" type="password">
+                <input id="password" class="input_box" type="password" autocomplete="off">
                 <div class="text_box">
                     Повторите пароль
                 </div>
-                <input class="input_box" type="password">
+                <input id="password_repeat" class="input_box" type="password" autocomplete="off">
                 <input type="submit" class="btn btn_submit" value="Регистрация">
             </form>
         </div>

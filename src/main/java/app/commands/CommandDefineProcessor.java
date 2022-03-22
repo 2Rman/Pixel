@@ -1,19 +1,33 @@
 package app.commands;
 
-import static app.constant.ConstantCommand.*;
-import static app.constant.ConstantPage.*;
+import static app.constant.ConstantCommand.AUTHORIZATION_COMMAND;
+import static app.constant.ConstantCommand.REGISTRATION_COMMAND;
+
+/**
+ * Класс для определения поступающих на него команд
+ */
 
 public class CommandDefineProcessor {
 
-    public String defineCommand(String command) {
+    /**
+     * Метод определяет переданные команды и вызывает соответствующую команду
+     *
+     * @param currentCommand принятая команда
+     * @return соответствующая принятому параметру команда
+     */
 
-        switch (command) {
-            case REGISTER_COMMAND:
-                return REGISTER_PAGE;
-            case LOGIN_COMMAND:
-                return LOGIN_PAGE;
+    public Command defineCommand(String currentCommand) {
+
+        Command command = new EmptyCommand();
+
+        switch (currentCommand) {
+            case REGISTRATION_COMMAND:
+                command = new RegistrationCommand();
+                break;
+            case AUTHORIZATION_COMMAND:
+                command =  new AuthorizationCommand();
+                break;
         }
-
-        return MAIN_PAGE;
+        return command;
     }
 }

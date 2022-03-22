@@ -1,7 +1,7 @@
 
 <!Doctype html>
-    <!--<%@ page contentType="text/html;charset=UTF-8" language="java" %>-->
-<html xmlns:color="http://www.w3.org/1999/xhtml">
+    <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<html>
 <head>
     <meta charset="UTF-8">
     <link rel="stylesheet" type="text/css" href="../css/index.css">
@@ -25,8 +25,8 @@
             <img src="../image/Pixel.png">
         </div>
         <form method="post">
-            <input type="submit" class="btn" id="btn_register" formaction="/pixel?command=register" value="Регистрация">
-            <input type="submit" class="btn" id="btn_login" formaction="/pixel?command=login" value="Войти">
+            <input type="submit" class="btn" id="btn_registration" formaction="/pixel?command=registration" value="Регистрация">
+            <input type="submit" class="btn" id="btn_login" formaction="/pixel?command=authorization" value="Войти">
             <input type="submit" class="btn btn_about" id="btn_about" formaction="/pixel?command=about" value="Что такое PixeL">
         </form>
     </div>
