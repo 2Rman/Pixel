@@ -11,6 +11,10 @@ import java.io.IOException;
 
 import static app.constant.ConstantCommand.COMMAND;
 
+/**
+ * Сервлет-контроллер. Реализует часть "Controller" MVC-модели
+ */
+
 public class ControllerServlet extends HttpServlet {
 
     @Override
@@ -38,10 +42,5 @@ public class ControllerServlet extends HttpServlet {
             RequestDispatcher requestDispatcher = request.getRequestDispatcher("view/index.jsp");
             requestDispatcher.forward(request, response);
         }
-
-
-
-
-
     }
 }

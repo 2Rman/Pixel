@@ -10,10 +10,11 @@ import static app.constant.ConstantCommand.REGISTRATION_COMMAND;
 public class CommandDefineProcessor {
 
     /**
-     * Метод определяет переданные команды и вызывает соответствующую команду
+     * Метод определяет переданные команды и создает экземпляр соответствующей команды
      *
      * @param currentCommand принятая команда
-     * @return соответствующая принятому параметру команда
+     * @return соответствующий принятому параметру экземпляр команды (по умолчанию выполняется команда EMPTY в случае
+     * если команда пришла пустой
      */
 
     public Command defineCommand(String currentCommand) {
