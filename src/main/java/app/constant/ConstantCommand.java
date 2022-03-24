@@ -7,4 +7,5 @@ public class ConstantCommand {
     public static final String REGISTRATION_COMMAND = "registration";
     public static final String AUTHORIZATION_COMMAND = "authorization";
     public static final String REGISTER_COMMAND = "register";
+    public static final String LOG_IN_COMMAND = "log_in";
 }

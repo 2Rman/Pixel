@@ -11,7 +11,7 @@
 
     <title>Pixel</title>
 </head>
-<body class="body">
+<body>
     <div class="greetings_box">
         <div class="header_start">
             <div class="top_text">
