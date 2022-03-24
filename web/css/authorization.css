@@ -1,0 +1,48 @@
+.form_container {
+	text-align: center;
+}
+
+.register_form {
+	position: relative;
+	display: inline;
+	width: 80%;
+	height: 80%;
+}
+
+.text_top {
+	position: relative;
+	font-family: manrope;
+	font-weight: 900;
+	font-size: 4em;
+	padding-top: 2em;
+}
+
+.text_box {
+	position: relative;
+	font-family: manrope;
+	font-size: 3em;
+	padding-top: 1.5em;
+
+}
+
+.input_box {
+	position: relative;
+	text-align: center;
+	font-family: manrope;
+	font-weight: 700;
+	font-size: 2em;
+	letter-spacing: 0.07em;
+	margin: 0.5em;
+	width: 50%;
+	height: 2.5em;
+	border-width: 0.1em;
+	border-radius: 0.3em;
+	border-color: #9E9E9E;
+	border-style: solid;
+	box-sizing: content-box;
+	box-shadow: 0.2em 0.2em 5px rgba(122,122,122,0.5);
+}
+
+.btn_submit {
+	margin-top: 5em;
+}
