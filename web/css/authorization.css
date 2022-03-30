@@ -1,3 +1,7 @@
+* {
+	font-family: Manrope;
+}
+
 .form_container {
 	text-align: center;
 }
@@ -11,7 +15,6 @@
 
 .text_top {
 	position: relative;
-	font-family: manrope;
 	font-weight: 900;
 	font-size: 4em;
 	padding-top: 2em;
@@ -19,7 +22,6 @@
 
 .text_box {
 	position: relative;
-	font-family: manrope;
 	font-size: 3em;
 	padding-top: 1.5em;
 
@@ -28,7 +30,6 @@
 .input_box {
 	position: relative;
 	text-align: center;
-	font-family: manrope;
 	font-weight: 700;
 	font-size: 2em;
 	letter-spacing: 0.07em;

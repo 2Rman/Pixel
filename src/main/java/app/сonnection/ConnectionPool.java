@@ -1,4 +1,4 @@
-package app.dbConnection;
+package app.сonnection;
 
 import javax.naming.Context;
 import javax.naming.InitialContext;
@@ -21,7 +21,7 @@ public class ConnectionPool {
      * Метод создания ЕДИНСТВЕННОГО пула
      * @return экземпляр пула подключений к БД
      */
-    private static ConnectionPool getInstance() {
+    public static ConnectionPool getInstance() {
         if (instance == null) {
             instance = new ConnectionPool();
         }

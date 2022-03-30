@@ -1,4 +1,4 @@
-package app.commands;
+package app.command;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -20,9 +20,7 @@ public class AuthorizationCommand implements Command {
      * @throws IOException
      */
     @Override
-    public void execute(HttpServletRequest request, HttpServletResponse response) throws IOException {
-
-        response.sendRedirect(AUTHORIZATION_PAGE);
-
+    public String execute(HttpServletRequest request, HttpServletResponse response) throws IOException {
+        return AUTHORIZATION_PAGE;
     }
 }

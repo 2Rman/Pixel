@@ -21,7 +21,7 @@ img {
 	width: 100%;
 	height: auto;
 	-webkit-filter: drop-shadow(3px 5px 5px #000);
-  filter: drop-shadow(3px 5px 5px #000);
+  	filter: drop-shadow(3px 5px 5px #000);
 }
 
 .top_text {
@@ -30,6 +30,7 @@ img {
 	font-weight: 700;
 	text-align: center;
 	letter-spacing: 0.07em;
+	text-shadow: 0.1em 0.2em 5px rgba(122,122,122,0.5);
 }
 
 .below_text {
@@ -46,7 +47,6 @@ img {
 	position: relative;
 	width: 100%;
 	text-align: center;
-
 }
 
 .btn {
@@ -67,7 +67,6 @@ img {
 	margin-right: 3em;
 	text-shadow: 0.1em 0.2em 5px rgba(122,122,122,0.5);
 	box-shadow: 0.2em 0.2em 5px rgba(122,122,122,0.5);
-
 }
 
 .btn_about {

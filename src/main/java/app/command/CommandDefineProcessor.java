@@ -1,7 +1,6 @@
-package app.commands;
+package app.command;
 
-import static app.constant.ConstantCommand.AUTHORIZATION_COMMAND;
-import static app.constant.ConstantCommand.REGISTRATION_COMMAND;
+import static app.constant.ConstantCommand.*;
 
 /**
  * Класс для определения поступающих на него команд
@@ -27,6 +26,9 @@ public class CommandDefineProcessor {
                 break;
             case AUTHORIZATION_COMMAND:
                 command =  new AuthorizationCommand();
+                break;
+            case REGISTER_COMMAND:
+                command =  new RegisterCommand();
                 break;
         }
         return command;

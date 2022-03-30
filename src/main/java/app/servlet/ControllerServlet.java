@@ -1,6 +1,6 @@
-package app.servlets;
+package app.servlet;
 
-import app.commands.CommandDefineProcessor;
+import app.command.CommandDefineProcessor;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -37,10 +37,11 @@ public class ControllerServlet extends HttpServlet {
         CommandDefineProcessor commandDefineProcessor = new CommandDefineProcessor();
 
         if (currentCommand != null) {
-            commandDefineProcessor.defineCommand(currentCommand).execute(request, response);
-        } else {
-            RequestDispatcher requestDispatcher = request.getRequestDispatcher("view/index.jsp");
+            RequestDispatcher requestDispatcher = request.getRequestDispatcher(commandDefineProcessor.defineCommand(currentCommand).execute(request, response));
             requestDispatcher.forward(request, response);
+
+        } else {
+            response.sendRedirect("view/index.jsp");
         }
     }
 }

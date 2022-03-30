@@ -17,24 +17,24 @@
             <img src="../image/Pixel.png" alt="PixeL">
         </div>
         <div class="form_container">
-            <form class="register_form" method="post" action="/pixel?command=register">
+            <form id="register" class="register_form" action="/pixel">
                 <div class="text_box">
                     Как к Вам обращаться?
                 </div>
-                <input class="input_box" type="text" placeholder="Ваше имя" name="username">
+                <input class="input_box" name="username" type="text" placeholder="Ваше имя">
                 <div class="text_box">
                     Ваш номер телефона
                 </div>
-                <input class="input_box" type="text" placeholder="+375 29 123 45 67">
+                <input class="input_box" name="phone" type="text" placeholder="+375 29 123 45 67">
                 <div class="text_box">
                     Задайте пароль
                 </div>
-                <input id="password" class="input_box" type="password">
+                <input id="password" name="password" class="input_box" type="password">
                 <div class="text_box">
                     Повторите пароль
                 </div>
                 <input id="password_repeat" class="input_box" type="password">
-                <input type="submit" class="btn btn_submit" value="Регистрация">
+                <button type="submit" formmethod="post" class="btn btn_submit" name="command" value="register">Регистрация</button>
             </form>
         </div>
     </div>

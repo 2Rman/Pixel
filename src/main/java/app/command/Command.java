@@ -1,4 +1,4 @@
-package app.commands;
+package app.command;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -10,5 +10,5 @@ import java.io.IOException;
  * Создает слой абстракции для защиты кода.
  */
 public interface Command {
-    public void execute(HttpServletRequest request, HttpServletResponse response) throws IOException;
+    public String execute(HttpServletRequest request, HttpServletResponse response) throws IOException;
 }
