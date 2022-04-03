@@ -1,4 +1,4 @@
-package app.сonnection;
+package app.connection;
 
 import javax.naming.Context;
 import javax.naming.InitialContext;
@@ -12,10 +12,9 @@ import java.sql.SQLException;
  */
 public class ConnectionPool {
 
-    private ConnectionPool() {
-    }
-
     private static ConnectionPool instance = null;
+
+    private ConnectionPool() {}
 
     /**
      * Метод создания ЕДИНСТВЕННОГО пула
@@ -39,8 +38,9 @@ public class ConnectionPool {
 
         try {
             context = new InitialContext();
-            DataSource dataSource = (DataSource) context.lookup("java/env/jdbc/pixelPool");
 
+            DataSource dataSource = (DataSource)context.lookup("java:comp/env/jdbc/pixelPool");
+//            connection = dataSource.getConnection("admin", "Ghjuhfvvf795!");
             connection = dataSource.getConnection();
         } catch (NamingException | SQLException e) {
             e.printStackTrace();

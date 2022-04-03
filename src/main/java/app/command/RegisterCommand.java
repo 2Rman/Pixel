@@ -36,7 +36,6 @@ public class RegisterCommand implements Command {
         accountDAO.create(account);
         account = accountDAO.getByNumber(Integer.parseInt(request.getParameter(PHONE)));
 
-        //КАК ЗАПИХНУТЬ ID В СЕССИЮ?----------------------------------------
         session.setAttribute("id", account.getAccountId());
 
         return ACCOUNT_MAIN_PAGE;

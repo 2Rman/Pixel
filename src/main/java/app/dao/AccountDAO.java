@@ -1,7 +1,7 @@
 package app.dao;
 
 import app.entity.Account;
-import app.сonnection.ConnectionPool;
+import app.connection.ConnectionPool;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -16,7 +16,7 @@ import static app.constant.ConstantQuery.GET_ACCOUNT_BY_ID;
 /**
  * Класс реализующий управления моделью Аккаунта
  */
-public class AccountDAO implements AbstractController<String, Account> {
+public class AccountDAO implements IAbstractDAO<String, Account> {
 
     @Override
     public List getALL() {
@@ -39,7 +39,7 @@ public class AccountDAO implements AbstractController<String, Account> {
     public boolean create(Account account) {
 
         Connection connection;
-        PreparedStatement preparedStatement;
+        PreparedStatement preparedStatement = null;
         boolean result = false;
 
         connection = ConnectionPool.getInstance().getConnection();
@@ -55,6 +55,9 @@ public class AccountDAO implements AbstractController<String, Account> {
             e.printStackTrace();
         } finally {
             try {
+                if (preparedStatement != null) {
+                    preparedStatement.close();
+                }
                 connection.close();
             } catch (SQLException e) {
                 e.printStackTrace();

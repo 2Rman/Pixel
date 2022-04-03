@@ -19,18 +19,20 @@ public class ControllerServlet extends HttpServlet {
 
     @Override
     public void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        processorGetPost(request, response);
+
+        processorHandler(request, response);
     }
 
     @Override
     public void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        processorGetPost(request, response);
+
+        processorHandler(request, response);
     }
 
     /**
      * Метод для обработки всех поступающих запросов
      */
-    private void processorGetPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    private void processorHandler(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
         String currentCommand = request.getParameter(COMMAND);
 
