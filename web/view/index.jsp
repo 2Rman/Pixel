@@ -5,13 +5,16 @@
 <head>
     <meta charset="UTF-8">
     <link rel="stylesheet" type="text/css" href="../css/index.css">
+    <link rel="stylesheet" type="text/css" href="../css/common/page.css">
     <link rel="stylesheet" type="text/css" href="../css/common/header.css">
+    <link rel="stylesheet" type="text/css" href="../css/common/rectangle.css">
     <link rel="stylesheet" type="text/css" href="../css/bona_nova.css">
     <link rel="stylesheet" type="text/css" href="../css/manrope.css">
 
     <title>Pixel</title>
 </head>
 <body>
+    <jsp:include page="common/background_rectangles.jsp"/>
     <div class="greetings_box">
         <div class="header_start">
             <div class="top_text">

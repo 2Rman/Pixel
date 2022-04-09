@@ -1,5 +1,7 @@
 package app.connection;
 
+import org.apache.log4j.Logger;
+
 import javax.naming.Context;
 import javax.naming.InitialContext;
 import javax.naming.NamingException;
@@ -12,23 +14,28 @@ import java.sql.SQLException;
  */
 public class ConnectionPool {
 
+    Logger logger = Logger.getLogger(ConnectionPool.class);
+
     private static ConnectionPool instance = null;
 
-    private ConnectionPool() {}
+    private ConnectionPool() {
+    }
 
     /**
      * Метод создания ЕДИНСТВЕННОГО пула
+     *
      * @return экземпляр пула подключений к БД
      */
     public static ConnectionPool getInstance() {
         if (instance == null) {
             instance = new ConnectionPool();
         }
-            return instance;
+        return instance;
     }
 
     /**
      * Метод получения нового подключения для дальнейшего взаимодействия с БД
+     *
      * @return новое соединение
      */
     public Connection getConnection() {
@@ -39,12 +46,13 @@ public class ConnectionPool {
         try {
             context = new InitialContext();
 
-            DataSource dataSource = (DataSource)context.lookup("java:comp/env/jdbc/pixelPool");
-//            connection = dataSource.getConnection("admin", "Ghjuhfvvf795!");
+            DataSource dataSource = (DataSource) context.lookup("java:comp/env/jdbc/pixelPool");
             connection = dataSource.getConnection();
         } catch (NamingException | SQLException e) {
             e.printStackTrace();
         }
+
+        logger.info("Connection to DB got");
 
         return connection;
     }

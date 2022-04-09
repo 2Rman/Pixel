@@ -1,7 +1,8 @@
 package app.dao;
 
-import app.entity.Account;
 import app.connection.ConnectionPool;
+import app.entity.Account;
+import org.apache.log4j.Logger;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -11,12 +12,14 @@ import java.util.List;
 import java.util.UUID;
 
 import static app.constant.ConstantQuery.CREATE_ACCOUNT;
-import static app.constant.ConstantQuery.GET_ACCOUNT_BY_ID;
+import static app.constant.ConstantQuery.GET_ACCOUNT_BY_PHONE_NUMBER;
 
 /**
  * Класс реализующий управления моделью Аккаунта
  */
 public class AccountDAO implements IAbstractDAO<String, Account> {
+
+    Logger logger = Logger.getLogger(AccountDAO.class);
 
     @Override
     public List getALL() {
@@ -36,11 +39,13 @@ public class AccountDAO implements IAbstractDAO<String, Account> {
      * @return результат выполнения запроса
      */
     @Override
-    public boolean create(Account account) {
+    public int create(Account account) {
+
+        logger.info("Creating new account-DAO");
 
         Connection connection;
         PreparedStatement preparedStatement = null;
-        boolean result = false;
+        int result = 0;
 
         connection = ConnectionPool.getInstance().getConnection();
         try {
@@ -49,7 +54,9 @@ public class AccountDAO implements IAbstractDAO<String, Account> {
             preparedStatement.setString(2, account.getName());
             preparedStatement.setString(3, account.getPhone());
             preparedStatement.setString(4, account.getPassword());
-            result = preparedStatement.execute();
+            preparedStatement.setInt(5, 0);
+            logger.info(preparedStatement + " sending to DB");
+            result = preparedStatement.executeUpdate();
 
         } catch (SQLException e) {
             e.printStackTrace();
@@ -72,19 +79,20 @@ public class AccountDAO implements IAbstractDAO<String, Account> {
      * @param number переданный номер телефона
      * @return заполненную сущность аккаунта
      */
-    public Account getByNumber(int number) {
+    public Account getByPhoneNumber(String number) {
+
+        logger.info("Getting account from DB");
 
         Connection connection;
-        PreparedStatement preparedStatement;
+        PreparedStatement preparedStatement = null;
         ResultSet resultSet;
         Account account = new Account();
 
         connection = ConnectionPool.getInstance().getConnection();
 
-
         try {
-            preparedStatement = connection.prepareStatement(GET_ACCOUNT_BY_ID);
-            preparedStatement.setInt(1, number);
+            preparedStatement = connection.prepareStatement(GET_ACCOUNT_BY_PHONE_NUMBER);
+            preparedStatement.setString(1, number);
 
             resultSet = preparedStatement.executeQuery();
 
@@ -96,10 +104,16 @@ public class AccountDAO implements IAbstractDAO<String, Account> {
                 account.setSavings(resultSet.getInt(5));
             }
 
+            logger.info("New account created:");
+            logger.info(account.toString());
+
         } catch (SQLException e) {
             e.printStackTrace();
         } finally {
             try {
+                if (preparedStatement != null) {
+                    preparedStatement.close();
+                }
                 connection.close();
             } catch (SQLException e) {
                 e.printStackTrace();

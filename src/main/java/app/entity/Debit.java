@@ -4,6 +4,9 @@ import lombok.Data;
 
 import java.sql.Date;
 
+/**
+ * Класс сущность, реализующий сущности-затраты со всеми соответствующими полями
+ */
 @Data
 public class Debit extends Entity {
 

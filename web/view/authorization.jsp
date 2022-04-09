@@ -8,10 +8,12 @@
         <link rel="stylesheet" type="text/css" href="../css/index.css">
         <link rel="stylesheet" type="text/css" href="../css/common/header.css">
         <link rel="stylesheet" type="text/css" href="../css/common/page.css">
+        <link rel="stylesheet" type="text/css" href="../css/common/rectangle.css">
         <link rel="stylesheet" type="text/css" href="../css/authorization.css">
         <link rel="stylesheet" type="text/css" href="../css/manrope.css">
     </head>
     <body>
+        <jsp:include page="common/background_rectangles.jsp"/>
         <div class="header">
             <div class="logo">
                 <img src="../image/Pixel.png" alt="PixeL">
@@ -28,11 +30,11 @@
                     <div class="text_box">
                         Ваш номер телефона
                     </div>
-                    <input class="input_box" type="text" placeholder="+375 29 123 45 67" autocomplete="off">
+                    <input class="input_box" name="phone_number" type="text" placeholder="+375 29 123 45 67" autocomplete="off">
                     <div class="text_box">
                         Введите пароль
                     </div>
-                    <input id="password" class="input_box" type="password" autocomplete="off">
+                    <input id="password" name="password" class="input_box" type="password" autocomplete="off">
                     <input type="submit" class="btn btn_submit" value="Войти">
                 </form>
             </div>

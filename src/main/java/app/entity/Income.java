@@ -4,6 +4,9 @@ import lombok.Data;
 
 import java.sql.Date;
 
+/**
+ * Класс сущность, реализующий сущности-дохода со всеми соответствующими полями
+ */
 @Data
 public class Income extends Entity {
 
