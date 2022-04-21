@@ -38,8 +38,6 @@ public class RegisterCommand implements Command {
 
         logger.info("Getting session from request-context");
 
-        HttpSession session = request.getSession();
-
         account.setName(request.getParameter(USERNAME));
         account.setPhone(request.getParameter(PHONE_NUMBER));
         account.setPassword(request.getParameter(PASSWORD));
@@ -47,6 +45,7 @@ public class RegisterCommand implements Command {
         accountDAO.create(account);
         account = accountDAO.getByPhoneNumber(request.getParameter(PHONE_NUMBER));
 
+        HttpSession session = request.getSession();
         session.setAttribute("id", account.getAccountId());
 
         logger.info("Session got id " + account.getAccountId());

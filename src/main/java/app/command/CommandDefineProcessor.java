@@ -7,7 +7,6 @@ import static app.constant.ConstantCommand.*;
 /**
  * Класс для определения поступающих на него команд
  */
-
 public class CommandDefineProcessor {
 
     Logger logger = Logger.getLogger(CommandDefineProcessor.class);

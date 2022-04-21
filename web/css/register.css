@@ -11,7 +11,6 @@
 
 .text_box {
 	position: relative;
-	font-family: manrope;
 	font-size: 3em;
 	padding-top: 1.5em;
 
@@ -20,7 +19,6 @@
 .input_box {
 	position: relative;
 	text-align: center;
-	font-family: manrope;
 	font-weight: 700;
 	font-size: 2em;
 	letter-spacing: 0.07em;

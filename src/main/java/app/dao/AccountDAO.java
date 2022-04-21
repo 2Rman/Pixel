@@ -11,8 +11,7 @@ import java.sql.SQLException;
 import java.util.List;
 import java.util.UUID;
 
-import static app.constant.ConstantQuery.CREATE_ACCOUNT;
-import static app.constant.ConstantQuery.GET_ACCOUNT_BY_PHONE_NUMBER;
+import static app.constant.ConstantQuery.*;
 
 /**
  * Класс реализующий управления моделью Аккаунта
@@ -26,9 +25,51 @@ public class AccountDAO implements IAbstractDAO<String, Account> {
         throw new UnsupportedOperationException();
     }
 
+    /**
+     * Метод для получения сущности аккаунта из БД по ID
+     * @param id-аккаунта в БД (он же присваивается сессии)
+     * @return заполненную сущность аккаунта
+     */
     @Override
     public Account getById(String id) {
-        throw new UnsupportedOperationException();
+
+        logger.info("Getting account by ID from DB");
+
+        PreparedStatement preparedStatement = null;
+        Account account = new Account();
+
+        Connection connection = ConnectionPool.getInstance().getConnection();
+
+        try {
+            preparedStatement = connection.prepareStatement(GET_ACCOUNT_BY_ID);
+            preparedStatement.setString(1, id);
+
+            ResultSet resultSet = preparedStatement.executeQuery();
+
+            while (resultSet.next()) {
+                account.setAccountId(resultSet.getString(1));
+                account.setName(resultSet.getString(2));
+                account.setPhone(resultSet.getString(3));
+                account.setPassword(resultSet.getString(4));
+                account.setSavings(resultSet.getInt(5));
+            }
+
+            logger.info("Account got from DB by ID");
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                if (preparedStatement != null) {
+                    preparedStatement.close();
+                }
+                connection.close();
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
+
+        return account;
     }
 
     /**
@@ -43,11 +84,10 @@ public class AccountDAO implements IAbstractDAO<String, Account> {
 
         logger.info("Creating new account-DAO");
 
-        Connection connection;
         PreparedStatement preparedStatement = null;
         int result = 0;
 
-        connection = ConnectionPool.getInstance().getConnection();
+        Connection connection = ConnectionPool.getInstance().getConnection();
         try {
             preparedStatement = connection.prepareStatement(CREATE_ACCOUNT);
             preparedStatement.setString(1, String.valueOf(UUID.randomUUID()));
@@ -81,20 +121,18 @@ public class AccountDAO implements IAbstractDAO<String, Account> {
      */
     public Account getByPhoneNumber(String number) {
 
-        logger.info("Getting account from DB");
+        logger.info("Getting account by PHONE_NUMBER from DB");
 
-        Connection connection;
         PreparedStatement preparedStatement = null;
-        ResultSet resultSet;
         Account account = new Account();
 
-        connection = ConnectionPool.getInstance().getConnection();
+        Connection connection = ConnectionPool.getInstance().getConnection();
 
         try {
             preparedStatement = connection.prepareStatement(GET_ACCOUNT_BY_PHONE_NUMBER);
             preparedStatement.setString(1, number);
 
-            resultSet = preparedStatement.executeQuery();
+            ResultSet resultSet = preparedStatement.executeQuery();
 
             while (resultSet.next()) {
                 account.setAccountId(resultSet.getString(1));

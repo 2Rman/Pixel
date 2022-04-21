@@ -18,28 +18,29 @@
         <div class="logo">
             <img src="../image/Pixel.png" alt="PixeL">
         </div>
-        <div class="form_container">
-            <form id="register" class="register_form" action="/pixel?command=log_in">
-                <div class="text_box">
-                    Как к Вам обращаться?
-                </div>
-                <input class="input_box" name="username" type="text" formenctype="" placeholder="Ваше имя" required>
-                <div class="text_box">
-                    Ваш номер телефона
-                </div>
-                <input class="input_box" name="phone" type="tel" placeholder="+375 29 123 45 67" required>
-                <div class="text_box">
-                    Задайте пароль
-                </div>
-                <input id="password" name="password" class="input_box" type="password" required>
-                <div class="text_box">
-                    Повторите пароль
-                </div>
-                <input id="password_repeat" class="input_box" type="password">
-                <button type="submit" formmethod="post" class="btn btn_submit" name="command" value="register">Регистрация</button>
-            </form>
-        </div>
     </div>
+    <div class="form_container">
+        <form id="register" class="register_form" action="/pixel?command=register">
+            <div class="text_box">
+                Как к Вам обращаться?
+            </div>
+            <input class="input_box" name="username" type="text" formenctype="" placeholder="Ваше имя" required>
+            <div class="text_box">
+                Ваш номер телефона
+            </div>
+            <input class="input_box" name="phone_number" type="tel" placeholder="+375 29 123 45 67" required>
+            <div class="text_box">
+                Задайте пароль
+            </div>
+            <input id="password" name="password" class="input_box" type="password" required>
+            <div class="text_box">
+                Повторите пароль
+            </div>
+            <input id="password_repeat" class="input_box" type="password">
+            <button type="submit" formmethod="post" class="btn btn_submit" name="command" value="register">Регистрация</button>
+        </form>
+    </div>
+
 
 </body>
 </html>

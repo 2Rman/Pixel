@@ -1,5 +1,29 @@
+* {
+	/*text-rendering: optimizeLegibility;*/
+	text-rendering: geometricPrecision;
+	font-family: Manrope;
+	font-style: normal;
+}
+
 body {
 	background-color: #F3F4F8;
 	text-shadow: 0.4em 0.2em 5px rgba(122,122,122,0.5);
 	height: 100%;
+	margin: 0 !important;
+}
+
+img {
+	display: block;
+	position: relative;
+	width: 100%;
+	height: auto;
+	filter: drop-shadow(3px 5px 5px #000);
+}
+
+.logo {
+	position: relative;
+	width: 17em;
+	height: 100%;
+	display: flex;
+	/*filter: drop-shadow(3px 5px 5px #000);*/
 }

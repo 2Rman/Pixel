@@ -18,26 +18,27 @@
             <div class="logo">
                 <img src="../image/Pixel.png" alt="PixeL">
             </div>
-            <div class="form_container">
-                <form class="register_form" method="post" action="/pixel?command=log_in">
-                    <div class="text_top">
-                        Уже есть аккаунт?
-                    </div>
-                    <div class="text_box">
-                        <div>Просто введите</div>
-                        <div>Ваш номер телефона и пароль!</div>
-                    </div>
-                    <div class="text_box">
-                        Ваш номер телефона
-                    </div>
-                    <input class="input_box" name="phone_number" type="text" placeholder="+375 29 123 45 67" autocomplete="off">
-                    <div class="text_box">
-                        Введите пароль
-                    </div>
-                    <input id="password" name="password" class="input_box" type="password" autocomplete="off">
-                    <input type="submit" class="btn btn_submit" value="Войти">
-                </form>
-            </div>
         </div>
+        <div class="form_container">
+            <form class="register_form" method="post" action="/pixel?command=log_in">
+                <div class="text_top">
+                    Уже есть аккаунт?
+                </div>
+                <div class="text_box">
+                    <div>Просто введите</div>
+                    <div>Ваш номер телефона и пароль!</div>
+                </div>
+                <div class="text_box">
+                    Ваш номер телефона
+                </div>
+                <input class="input_box" name="phone_number" type="text" placeholder="+375 29 123 45 67" autocomplete="off">
+                <div class="text_box">
+                    Введите пароль
+                </div>
+                <input id="password" name="password" class="input_box" type="password" autocomplete="off">
+                <input type="submit" class="btn btn_submit" value="Войти">
+            </form>
+        </div>
+
     </body>
 </html>

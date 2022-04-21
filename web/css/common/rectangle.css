@@ -1,8 +1,10 @@
 .rectangles {
     position: absolute;
     display: inline-flex;
+    top: 0;
     width: 100%;
     height: 100%;
+    align-items: stretch;
 }
 
 .rectangle_left {

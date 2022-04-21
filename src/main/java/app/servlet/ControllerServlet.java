@@ -36,9 +36,9 @@ public class ControllerServlet extends HttpServlet {
      */
     private void processorHandler(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
-        logger.info(request.getParameter(COMMAND) + "-command got");
-
         request.setCharacterEncoding("UTF-8");
+
+        logger.info(request.getParameter(COMMAND) + "-command got");
 
         String currentCommand = request.getParameter(COMMAND);
 
