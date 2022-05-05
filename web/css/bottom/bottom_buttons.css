@@ -1,0 +1,26 @@
+.bottom-buttons {
+    width: 80%;
+    display: flex;
+    flex-direction: row;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.btn_bottom {
+    font-size: 2em;
+    width: 40%;
+    height: 2.5em;
+    letter-spacing: 0.1em;
+    font-weight: 700;
+    background-color: #ffffff;
+    border-color: #9e9e9e;
+    border-radius: 0.4em;
+    border-width: 0.1em;
+    border-style: solid;
+    margin-top: 0.5em;
+    margin-bottom: 0.5em;
+    margin-left: 2em;
+    margin-right: 2em;
+    text-shadow: 0.1em 0.2em 5px rgba(122, 122, 122, 0.5);
+    box-shadow: 0.2em 0.2em 5px rgba(122, 122, 122, 0.5);
+}

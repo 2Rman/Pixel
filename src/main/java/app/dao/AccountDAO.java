@@ -16,7 +16,7 @@ import static app.constant.ConstantQuery.*;
 /**
  * Класс реализующий управления моделью Аккаунта
  */
-public class AccountDAO implements IAbstractDAO<String, Account> {
+public class AccountDAO implements AbstractDAO<String, Account> {
 
     Logger logger = Logger.getLogger(AccountDAO.class);
 

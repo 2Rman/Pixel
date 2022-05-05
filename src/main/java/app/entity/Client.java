@@ -11,5 +11,5 @@ public class Client extends Entity {
     private String idClient;
     private String firstName;
     private String lastName;
-    private String idAccount;
+
 }

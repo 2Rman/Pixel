@@ -1,24 +1,40 @@
 .cell {
     position: relative;
-    width: 13%;
-    height: 100%;
+    width: 12%;
+    height: 9em;
     display: flex;
-    border-width: thick;
+    border: medium solid #9e9e9e;
+    border-radius: 0.5em;
     border-collapse: collapse;
+    flex-direction: column;
+    align-items: center;
+    background-color: #ffffff;
+}
+
+.date-cell {
+    font-weight: 800;
+    font-size: 2em;
+    text-align: center;
+    display: table;
 }
 
 .lines-cell {
     position: relative;
     width: 100%;
-    height: 60%;
+    height: 70%;
     display: inline-flex;
+    justify-content: space-between;
+    flex-direction: row;
 }
 
 .green_lines {
     position: relative;
     width: 45%;
     height: 100%;
-    display: block;
+    display: flex;
+    align-items: flex-end;
+    flex-direction: column;
+    margin-left: 0.1em;
 }
 
 .green_line {
@@ -26,13 +42,19 @@
     left: 0;
     width: 100%;
     height: 1em;
+    background-color: #a7d28e;
+    margin-top: 0.1em;
+    margin-bottom: 0.2em;
 }
 
 .red_lines {
     position: relative;
     width: 45%;
     height: 100%;
-    display: block;
+    display: flex;
+    align-items: flex-end;
+    flex-direction: column;
+    margin-right: 0.1em;
 }
 
 .red_line {
@@ -40,4 +62,7 @@
     right: 0;
     width: 100%;
     height: 1em;
+    background-color: #db8291;
+    margin-top: 0.1em;
+    margin-bottom: 0.2em;
 }

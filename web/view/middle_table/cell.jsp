@@ -8,14 +8,13 @@
     </div>
     <div class="lines-cell">
         <div class="green_lines">
-            <div class="green_line">
-
-            </div>
+            <div class="green_line"></div>
+            <div class="green_line"></div>
+            <div class="green_line"></div>
         </div>
         <div class="red_lines">
-            <div class="red_line">
-
-            </div>
+            <div class="red_line"></div>
+            <div class="red_line"></div>
         </div>
     </div>
 

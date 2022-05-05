@@ -21,5 +21,18 @@ public class ConstantQuery {
     public static final String UPDATE_ACCOUNT = "";
     public static final String UPDATE_CLIENT = "";
 
+    //language=sql
+    public static final String GET_MONTH_INCOME = "SELECT date, service_name, amount, first_name, last_name, commentary " +
+            "FROM income\n" +
+            "LEFT JOIN client on income.id_client = client.id_client\n" +
+            "LEFT JOIN service_type st on income.id_service_type = st.id_service_type\n" +
+            "WHERE (id_account = ? AND (date BETWEEN ? AND ?))\n" +
+            "ORDER BY date;";
+    //language=sql
+    public static final String GET_MONTH_EXPENSE = "SELECT date, expense_name, amount, commentary " +
+            "FROM expense\n" +
+            "LEFT JOIN expense_type ex on expense.id_expense_type = ex.id_expense_type\n" +
+            "WHERE (id_account = ? AND (date BETWEEN ? AND ?))\n" +
+            "ORDER BY date;";
 
 }

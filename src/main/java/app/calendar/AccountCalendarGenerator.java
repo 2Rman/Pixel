@@ -7,22 +7,27 @@ import java.time.Month;
  * Класс, предназначенный для создания календаря, вычисление количества строк (недель) на главной странице
  * в зависимости от текущего месяца
  * и определение остальных полей, связанных с построением таблицы календаря
+ * TODO це будет утилитный класс
  */
 public class AccountCalendarGenerator {
 
     //    FOR TESTS
-//    private int currentYear = 2022;
-//    private Month currentMonth = Month.of(4);
-    private final int currentYear = LocalDate.now().getYear();
-    private final Month currentMonth = LocalDate.now().getMonth();
-    private final int numberOfRows = calculateNumberOfRows();
-    private final int[][] calendarValues = calculateCalendarValues();
+    private int currentYear = 2021;
+    private Month currentMonth = Month.of(3);
+//    private final int currentYear = LocalDate.now().getYear();
+//    private final Month currentMonth = LocalDate.now().getMonth();
+    private int numberOfRows = calculateNumberOfRows();
+    private LocalDate[][] calendarValues = calculateCalendarValues(numberOfRows);
 
     public int getNumberOfRows() {
         return numberOfRows;
     }
 
-    public int[][] getCalendarValues() {
+    /**
+     * TODO сделать статическим метод со всеми вытекающими...
+     * @return
+     */
+    public LocalDate[][] getCalendarValues() {
         return calendarValues;
     }
 
@@ -50,24 +55,25 @@ public class AccountCalendarGenerator {
     /**
      * Метод для создания двумерного массива числами из реального календаря.
      *
+     * TODO отрефакторить - убрать counter
+     *
      * @return заполненную таблицу-календарь
      */
-    private int[][] calculateCalendarValues() {
+    private LocalDate[][] calculateCalendarValues(int numberOfRows) {
 
         int currentDayOfWeek = LocalDate.of(currentYear, currentMonth, 1).getDayOfWeek().getValue() - 1;
-        LocalDate firstDateOfWeek = LocalDate.of(currentYear, currentMonth, 1).minusDays(currentDayOfWeek);
+        LocalDate firstDateOfFirstWeek = LocalDate.of(currentYear, currentMonth, 1).minusDays(currentDayOfWeek);
 
         int counter = 0;
 
-        int[][] table = new int[numberOfRows][7];
+        LocalDate[][] table = new LocalDate[numberOfRows][7];
 
         for (int i = 0; i < numberOfRows; i++) {
             for (int j = 0; j < 7; j++) {
-                table[i][j] = firstDateOfWeek.plusDays(counter).getDayOfMonth();
+                table[i][j] = firstDateOfFirstWeek.plusDays(counter);
                 counter++;
             }
         }
-
         return table;
     }
 }

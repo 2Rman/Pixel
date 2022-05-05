@@ -1,4 +1,4 @@
 package app.entity;
 
-public abstract class Day {
+public interface Day {
 }

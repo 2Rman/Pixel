@@ -10,7 +10,7 @@ import java.util.List;
  * @param <E> сущность, наследованная от абстрактного класса сущности
  * @param <K> id в таблице БД
  */
-public interface IAbstractDAO<K, E extends Entity> {
+public interface AbstractDAO<K, E extends Entity> {
 
     List<E> getALL();
     E getById(K id);
