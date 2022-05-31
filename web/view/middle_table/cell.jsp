@@ -1,10 +1,11 @@
 
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+
 <div class="cell">
     <div class="date-cell">
-        <h>
-            7
-        </h>
+        <p>
+            ${day.date.dayOfMonth}
+        </p>
     </div>
     <div class="lines-cell">
         <div class="green_lines">

@@ -15,70 +15,13 @@
     <link rel="stylesheet" type="text/css" href="../../css/bottom/bottom_buttons.css">
 </head>
 <body>
-    
-    <jsp:useBean id="accountDAO" scope="session" class="app.dao.AccountDAO"/>
-
-    <c:set var="account" value="accountDAO.getById()}"/>
 
     <jsp:include page="../common/background_rectangles.jsp"/>
     <jsp:include page="../common/account_header.jsp"/>
     <jsp:include page="../common/middle_buttons.jsp"/>
-
-    <div class="calendar-table">
-
-        <div class="calendar-row">
-            <jsp:include page="../middle_table/cell.jsp"/>
-            <jsp:include page="../middle_table/cell.jsp"/>
-            <jsp:include page="../middle_table/cell.jsp"/>
-            <jsp:include page="../middle_table/cell.jsp"/>
-            <jsp:include page="../middle_table/cell.jsp"/>
-            <jsp:include page="../middle_table/cell.jsp"/>
-            <jsp:include page="../middle_table/cell.jsp"/>
-        </div>
-        <div class="calendar-row">
-            <jsp:include page="../middle_table/cell.jsp"/>
-            <jsp:include page="../middle_table/cell.jsp"/>
-            <jsp:include page="../middle_table/cell.jsp"/>
-            <jsp:include page="../middle_table/cell.jsp"/>
-            <jsp:include page="../middle_table/cell.jsp"/>
-            <jsp:include page="../middle_table/cell.jsp"/>
-            <jsp:include page="../middle_table/cell.jsp"/>
-        </div>
-        <div class="calendar-row">
-            <jsp:include page="../middle_table/cell.jsp"/>
-            <jsp:include page="../middle_table/cell.jsp"/>
-            <jsp:include page="../middle_table/cell.jsp"/>
-            <jsp:include page="../middle_table/cell.jsp"/>
-            <jsp:include page="../middle_table/cell.jsp"/>
-            <jsp:include page="../middle_table/cell.jsp"/>
-            <jsp:include page="../middle_table/cell.jsp"/>
-        </div>
-        <div class="calendar-row">
-            <jsp:include page="../middle_table/cell.jsp"/>
-            <jsp:include page="../middle_table/cell.jsp"/>
-            <jsp:include page="../middle_table/cell.jsp"/>
-            <jsp:include page="../middle_table/cell.jsp"/>
-            <jsp:include page="../middle_table/cell.jsp"/>
-            <jsp:include page="../middle_table/cell.jsp"/>
-            <jsp:include page="../middle_table/cell.jsp"/>
-        </div>
-        <div class="calendar-row">
-            <jsp:include page="../middle_table/cell.jsp"/>
-            <jsp:include page="../middle_table/cell.jsp"/>
-            <jsp:include page="../middle_table/cell.jsp"/>
-            <jsp:include page="../middle_table/cell.jsp"/>
-            <jsp:include page="../middle_table/cell.jsp"/>
-            <jsp:include page="../middle_table/cell.jsp"/>
-            <jsp:include page="../middle_table/cell.jsp"/>
-        </div>
-    </div>
+    <jsp:include page="../middle_table/month_table.jsp"/>
 
     <div class="info-table">
-        <jsp:include page="../bottom_items/info_table.jsp"/>
-        <jsp:include page="../bottom_items/info_table.jsp"/>
-        <jsp:include page="../bottom_items/info_table.jsp"/>
-        <jsp:include page="../bottom_items/info_table.jsp"/>
-        <jsp:include page="../bottom_items/info_table.jsp"/>
         <jsp:include page="../bottom_items/info_table.jsp"/>
     </div>
 

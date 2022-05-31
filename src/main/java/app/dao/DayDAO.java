@@ -5,13 +5,14 @@ import app.entity.Entity;
 import java.util.List;
 
 public class DayDAO implements AbstractDAO {
+
     @Override
-    public List getALL() {
+    public List getAll(String id) {
         return null;
     }
 
     @Override
-    public Entity getById(Object id) {
+    public Entity getById(String id) {
         return null;
     }
 

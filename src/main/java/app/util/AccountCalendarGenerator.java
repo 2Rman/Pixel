@@ -1,4 +1,4 @@
-package app.calendar;
+package app.util;
 
 import java.time.LocalDate;
 import java.time.Month;
@@ -11,41 +11,35 @@ import java.time.Month;
  */
 public class AccountCalendarGenerator {
 
-    //    FOR TESTS
-    private int currentYear = 2021;
-    private Month currentMonth = Month.of(3);
-//    private final int currentYear = LocalDate.now().getYear();
-//    private final Month currentMonth = LocalDate.now().getMonth();
-    private int numberOfRows = calculateNumberOfRows();
-    private LocalDate[][] calendarValues = calculateCalendarValues(numberOfRows);
-
-    public int getNumberOfRows() {
-        return numberOfRows;
-    }
+    private int year;
+    private Month month;
 
     /**
-     * TODO сделать статическим метод со всеми вытекающими...
+     * TODO сделать статическим метод со всеми вытекающими... но не получится, возможно............... делаем, думаем...
      * @return
      */
-    public LocalDate[][] getCalendarValues() {
-        return calendarValues;
+    public LocalDate[][] getCalendarValues(LocalDate date) {
+        return calculateCalendarValues(calculateNumberOfRows(date));
     }
 
     /**
-     * Метод для подсчета количества отображаемых строк в календаре на странице клиента в зависимости от текущего месяца
+     * Метод для подсчета количества отображаемых строк в календаре на странице клиента в зависимости от переданного месяца
      * Алгоритм вычисления основан на определении первого дня недели текущего месяца и
      * последнего числа предыдущего месяца.
      *
      * @return int количество отображаемых строк в таблице на странице пользователя в календаре
      */
-    private int calculateNumberOfRows() {
+    private int calculateNumberOfRows(LocalDate date) {
 
-        String firstDayOfWeek = String.valueOf(LocalDate.of(currentYear, currentMonth, 1).getDayOfWeek());
-        String lastDayOfThisMonth = (String.valueOf((LocalDate.of(currentYear, currentMonth, 1).lengthOfMonth())));
+        this.year = date.getYear();
+        this.month = date.getMonth();
 
-        if (firstDayOfWeek.equals("MONDAY") && String.valueOf(currentMonth.getValue()).equals("2")) {
+        String firstDayOfWeek = String.valueOf(LocalDate.of(year, month, 1).getDayOfWeek());
+        String lastDayOfThisMonth = (String.valueOf((LocalDate.of(year, month, 1).lengthOfMonth())));
+
+        if (firstDayOfWeek.equals("MONDAY") && String.valueOf(month.getValue()).equals("2")) {
             return 4;
-        } else if (firstDayOfWeek.equals("SUNDAY") && !String.valueOf(currentMonth.getValue()).equals("2")) {
+        } else if (firstDayOfWeek.equals("SUNDAY") && !String.valueOf(month.getValue()).equals("2")) {
             return 6;
         } else if (firstDayOfWeek.equals("SATURDAY") && lastDayOfThisMonth.equals("31")) {
             return 6;
@@ -61,8 +55,8 @@ public class AccountCalendarGenerator {
      */
     private LocalDate[][] calculateCalendarValues(int numberOfRows) {
 
-        int currentDayOfWeek = LocalDate.of(currentYear, currentMonth, 1).getDayOfWeek().getValue() - 1;
-        LocalDate firstDateOfFirstWeek = LocalDate.of(currentYear, currentMonth, 1).minusDays(currentDayOfWeek);
+        int currentDayOfWeek = LocalDate.of(year, month, 1).getDayOfWeek().getValue() - 1;
+        LocalDate firstDateOfFirstWeek = LocalDate.of(year, month, 1).minusDays(currentDayOfWeek);
 
         int counter = 0;
 

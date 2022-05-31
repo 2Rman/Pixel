@@ -1,7 +1,7 @@
 package app.command;
 
 import app.dao.AccountDAO;
-import app.entity.Account;
+import app.entity.AccountEntity;
 import org.apache.log4j.Logger;
 
 import javax.servlet.http.HttpServletRequest;
@@ -33,22 +33,22 @@ public class RegisterCommand implements Command {
 
         logger.info("Registration procedure started");
 
-        Account account = new Account();
+        AccountEntity account = new AccountEntity();
         AccountDAO accountDAO = new AccountDAO();
 
         logger.info("Getting session from request-context");
 
         account.setName(request.getParameter(USERNAME));
-        account.setPhone(request.getParameter(PHONE_NUMBER));
+        account.setPhoneNumber(request.getParameter(PHONE_NUMBER));
         account.setPassword(request.getParameter(PASSWORD));
 
         accountDAO.create(account);
         account = accountDAO.getByPhoneNumber(request.getParameter(PHONE_NUMBER));
 
         HttpSession session = request.getSession();
-        session.setAttribute("id", account.getAccountId());
+        session.setAttribute("id", account.getIdAccount());
 
-        logger.info("Session got id " + account.getAccountId());
+        logger.info("Session got id " + account.getIdAccount());
         logger.info("Returning ACCOUNT_MAIN_PAGE");
 
         return ACCOUNT_MAIN_PAGE;

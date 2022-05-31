@@ -2,8 +2,8 @@ package app.dao;
 
 import app.connection.ConnectionPool;
 import app.entity.Entity;
-import app.entity.NoteExpenseEntity;
-import app.entity.NoteIncomeEntity;
+import app.entity.ExpenseEntity;
+import app.entity.IncomeEntity;
 import org.apache.log4j.Logger;
 
 import java.sql.*;
@@ -11,8 +11,8 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
-import static app.constant.ConstantQuery.GET_MONTH_EXPENSE;
-import static app.constant.ConstantQuery.GET_MONTH_INCOME;
+import static app.constant.ConstantQuery.GET_PERIOD_EXPENSE;
+import static app.constant.ConstantQuery.GET_PERIOD_INCOME;
 
 /**
  * Класс для манипуляций с БД в рамках месяца
@@ -29,11 +29,11 @@ public class MonthDAO implements AbstractDAO {
      * @param dateEnd   конечная дата в календаре на странице
      * @return Список записей доходов в рамках заданных дат
      */
-    public List<NoteIncomeEntity> getMonthIncome(String id, LocalDate dateStart, LocalDate dateEnd) {
+    public List<IncomeEntity> getMonthIncome(String id, LocalDate dateStart, LocalDate dateEnd) {
 
         logger.info("Getting current month income data");
 
-        List<NoteIncomeEntity> notes = new ArrayList<>();
+        List<IncomeEntity> notes = new ArrayList<>();
 
         Date dStart = Date.valueOf(dateStart.toString());
         Date dEnd = Date.valueOf(dateEnd.toString());
@@ -43,7 +43,7 @@ public class MonthDAO implements AbstractDAO {
         logger.info("Connection got");
 
         try {
-            PreparedStatement preparedStatement = connection.prepareStatement(GET_MONTH_INCOME);
+            PreparedStatement preparedStatement = connection.prepareStatement(GET_PERIOD_INCOME);
 
             preparedStatement.setString(1, id);
             preparedStatement.setDate(2, dStart);
@@ -57,7 +57,7 @@ public class MonthDAO implements AbstractDAO {
                 int amount = resultSet.getInt(3);
                 String name = resultSet.getString(4) + " " + resultSet.getString(5);
                 String commentary = resultSet.getString(6);
-                notes.add(new NoteIncomeEntity(date, typeNote, amount, name, commentary));
+                notes.add(new IncomeEntity(date, typeNote, amount, name, commentary));
 
             }
         } catch (SQLException e) {
@@ -74,11 +74,11 @@ public class MonthDAO implements AbstractDAO {
      * @param dateEnd   конечная дата в календаре на странице
      * @return Список записей расходов в рамках заданных дат
      */
-    public List<NoteExpenseEntity> getMonthExpense(String id, LocalDate dateStart, LocalDate dateEnd) {
+    public List<ExpenseEntity> getMonthExpense(String id, LocalDate dateStart, LocalDate dateEnd) {
 
         logger.info("Getting current month expense data");
 
-        List<NoteExpenseEntity> notes = new ArrayList<>();
+        List<ExpenseEntity> notes = new ArrayList<>();
 
         Date dStart = Date.valueOf(dateStart.toString());
         Date dEnd = Date.valueOf(dateEnd.toString());
@@ -88,7 +88,7 @@ public class MonthDAO implements AbstractDAO {
         logger.info("Connection got");
 
         try {
-            PreparedStatement preparedStatement = connection.prepareStatement(GET_MONTH_EXPENSE);
+            PreparedStatement preparedStatement = connection.prepareStatement(GET_PERIOD_EXPENSE);
 
             preparedStatement.setString(1, id);
             preparedStatement.setDate(2, dStart);
@@ -101,7 +101,7 @@ public class MonthDAO implements AbstractDAO {
                 String typeNote = resultSet.getString(2);
                 int amount = resultSet.getInt(3);
                 String comment = resultSet.getString(4);
-                notes.add(new NoteExpenseEntity(date, typeNote, amount, comment));
+                notes.add(new ExpenseEntity(date, typeNote, amount, comment));
 
             }
         } catch (SQLException e) {
@@ -111,12 +111,12 @@ public class MonthDAO implements AbstractDAO {
     }
 
     @Override
-    public List getALL() {
+    public List getAll(String id) {
         return null;
     }
 
     @Override
-    public Entity getById(Object id) {
+    public Entity getById(String id) {
         return null;
     }
 
