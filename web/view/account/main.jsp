@@ -13,18 +13,18 @@
     <link rel="stylesheet" type="text/css" href="../../css/middle/cell.css">
     <link rel="stylesheet" type="text/css" href="../../css/bottom/info_table.css">
     <link rel="stylesheet" type="text/css" href="../../css/bottom/bottom_buttons.css">
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 </head>
 <body>
 
     <jsp:include page="../common/background_rectangles.jsp"/>
     <jsp:include page="../common/account_header.jsp"/>
     <jsp:include page="../common/middle_buttons.jsp"/>
-    <jsp:include page="../middle_table/month_table.jsp"/>
-
-    <div class="info-table">
-        <jsp:include page="../bottom_items/info_table.jsp"/>
+    <div id="mainTablePlace">
+        <jsp:include page="../middle_table/month_table.jsp"/>
     </div>
-
+    <jsp:include page="../bottom_items/info_table.jsp"/>
     <jsp:include page="../bottom_items/bottom_buttons.jsp"/>
 
 </body>

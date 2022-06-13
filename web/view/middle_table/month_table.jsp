@@ -6,13 +6,13 @@
 
 <c:set var="curdate" value="19"/>
 
-<div class="calendar-table">
+<div id="monthTable" class="calendar-table">
     <c:forEach var="week" items="${requestScope.periodData}">
         <div class="calendar-row">
             <c:forEach var="day" items="${week}">
                 <%--                ЗДЕСЬ В УСЛОВИИ (date.month-1) - т.к. месяцы в date читаются с 1--%>
-                <c:if test="${day.date.monthValue == date.month-1}">
-                    <div class="cell" >
+                <c:if test="${day.date.monthValue == date.month-3}">
+                    <div id="cell" class="cell" onclick="dayData(${day.date.dayOfMonth})" >
                         <div class="date-cell">
                             <p>
                                     ${day.date.dayOfMonth}
@@ -35,7 +35,7 @@
 
                 </c:if>
 <%--                ЗДЕСЬ В УСЛОВИИ (date.month-1) - т.к. месяцы в date читаются с 1--%>
-                <c:if test="${day.date.monthValue != date.month-1}">
+                <c:if test="${day.date.monthValue != date.month-3}">
                     <div class="cell_grey">
                         <div class="date-cell_grey">
                             <p>
@@ -48,3 +48,9 @@
         </div>
     </c:forEach>
 </div>
+
+<script>
+    function dayData(data) {
+        alert('It\'s ' + data + ' day!');
+    }
+</script>

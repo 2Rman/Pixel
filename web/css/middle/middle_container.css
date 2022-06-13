@@ -35,8 +35,8 @@
 
 .arrow {
     position: relative;
-    width: 7em;
-    height: 7em;
+    width: 5.5em;
+    height: auto;
     margin-top: 2em;
     filter: drop-shadow(0.1em 0.2em 5px rgba(122,122,122,0.5));
 }
@@ -47,9 +47,11 @@
 
 .calendar-table{
     width: 100%;
+    height: 46em;
     margin-top: 2em;
     display: flex;
     flex-direction: column;
+    justify-content: center;
 }
 
 .calendar-row {

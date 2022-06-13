@@ -1,16 +1,11 @@
 package app.command;
 
-import app.entity.DayEntity;
-import app.util.AccountCalendarGenerator;
-import app.util.TotalDataCollector;
-import app.util.RepresentationProcessor;
-import app.util.TableFactory;
 import app.dao.AccountDAO;
-import app.dao.ExpenseDAO;
-import app.dao.IncomeDAO;
 import app.entity.AccountEntity;
-import app.entity.ExpenseEntity;
-import app.entity.IncomeEntity;
+import app.util.RepresentationProcessor;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.json.JsonMapper;
+import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 import org.apache.log4j.Logger;
 
 import javax.servlet.http.HttpServletRequest;
@@ -18,7 +13,6 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.time.LocalDate;
-import java.util.List;
 
 import static app.constant.ConstantAttribute.MONTH;
 import static app.constant.ConstantAttribute.PHONE_NUMBER;
@@ -39,8 +33,8 @@ public class LogInCommand implements Command {
      * - инициализация сессии, добавление атрибутов (инфо об аккаунте)
      * <p>
      * TODO
-     *  - процедура проверки правильности введенного пароля
-     *  - возможно, вынесение инициализации сессии в отдельный метод
+     * - процедура проверки правильности введенного пароля
+     * - возможно, вынесение инициализации сессии в отдельный метод
      *
      * @param request  полученный запрос
      * @param response подготавливаемый ответ
@@ -67,20 +61,27 @@ public class LogInCommand implements Command {
 
         //Делается запрос в БД, запускается по сути процедура построения таблиц
         //TEST
-
         //ПРЕДПОЛОЖИМ, что это было получено со стороны клиента:
-        LocalDate testDate = LocalDate.of(2021,3,8);
+        LocalDate testDate = LocalDate.of(2021, 3, 8);
         String testPeriod = MONTH;
+        //КОНЦОВКА ТЕСТА
         //Получили, теперь считаем:
+
         RepresentationProcessor repProcessor = new RepresentationProcessor();
 
         repProcessor.collect(account.getIdAccount(), testDate, testPeriod);
 
         request.setAttribute("monthList", MONTH_LIST);
+
+        String jsonPeriodData;
+        ObjectMapper mapper = JsonMapper.builder().addModule(new JavaTimeModule()).build();
+        jsonPeriodData = mapper.writeValueAsString(repProcessor.getPeriodData());
+        logger.info(jsonPeriodData);
+
         request.setAttribute("periodData", repProcessor.getPeriodData());
         request.setAttribute("totalData", repProcessor.getTotalData().toMap());
 
-        //КОНЦОВКА ТЕСТА
+
         return ACCOUNT_MAIN_PAGE;
     }
 }

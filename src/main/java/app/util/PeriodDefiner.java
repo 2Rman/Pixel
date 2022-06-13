@@ -36,11 +36,11 @@ public class PeriodDefiner {
     /**
      * Метод отсчитывает начальную и конечную даты МЕСЯЦА, в который входит переданная дата
      *
-     * @param date переданная со стороны клиента дата
+     * @param receivedDate переданная со стороны клиента дата
      * @return массив из 2 элементов, содержащий начальную и конечную даты месяца
      */
-    public static LocalDate[] calculateMonth(LocalDate date) {
-        return new LocalDate[]{date.withDayOfMonth(1), date.plusMonths(1).withDayOfMonth(1).minusDays(1)};
+    public static LocalDate[] calculateMonth(LocalDate receivedDate) {
+        return new LocalDate[]{receivedDate.withDayOfMonth(1), receivedDate.plusMonths(1).withDayOfMonth(1).minusDays(1)};
     }
 
     /**

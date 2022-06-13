@@ -20,7 +20,7 @@ public class CommandDefineProcessor {
      */
     public Command defineCommand(String currentCommand) {
 
-        logger.info("Try to define got command");
+        logger.info("Try to execute command");
 
         Command command;
 
@@ -36,6 +36,9 @@ public class CommandDefineProcessor {
                 break;
             case LOG_IN_COMMAND:
                 command = new LogInCommand();
+                break;
+            case PREVIOUS:
+                command = new PreviousCommand();
                 break;
             default:
                 command = new EmptyCommand();

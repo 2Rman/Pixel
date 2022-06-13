@@ -1,0 +1,2 @@
+
+document.getElementById("monthTable").remove()

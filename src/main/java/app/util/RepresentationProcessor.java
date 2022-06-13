@@ -39,7 +39,7 @@ public class RepresentationProcessor {
 
         LocalDate[] period;
 
-        switch (receivedPeriod) {
+        switch (receivedPeriod.toLowerCase()) {
             case DAY: {
                 period =  PeriodDefiner.calculateDay(receivedDate);
                 break;
