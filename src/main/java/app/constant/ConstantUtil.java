@@ -7,4 +7,8 @@ public class ConstantUtil {
 
     public static final int HUNDRED = 100;
 
+    public static final String PREVIOUS = "previous";
+    public static final String NEXT = "next";
+    public static final String CURRENT = "current";
+
 }

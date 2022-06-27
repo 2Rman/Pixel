@@ -15,16 +15,25 @@
     <link rel="stylesheet" type="text/css" href="../../css/bottom/bottom_buttons.css">
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="../../js/middleTableGenerator.js"></script>
+    <script src="../../js/upperButtonsGenerator.js"></script>
+    <script src="../../js/totalDataTableGenerator.js"></script>
+    <script src="../../js/periodChanger.js"></script>
+    <script src="../../js/constant.js"></script>
 </head>
 <body>
 
     <jsp:include page="../common/background_rectangles.jsp"/>
     <jsp:include page="../common/account_header.jsp"/>
-    <jsp:include page="../common/middle_buttons.jsp"/>
+    <div id="upperButtonsPlace">
+        <jsp:include page="../common/middle_buttons.jsp"/>
+    </div>
     <div id="mainTablePlace">
         <jsp:include page="../middle_table/month_table.jsp"/>
     </div>
-    <jsp:include page="../bottom_items/info_table.jsp"/>
+    <div id="totalDataPlace">
+        <jsp:include page="../bottom_items/info_table.jsp"/>
+    </div>
     <jsp:include page="../bottom_items/bottom_buttons.jsp"/>
 
 </body>

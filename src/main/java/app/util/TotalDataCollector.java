@@ -59,6 +59,20 @@ public class TotalDataCollector {
         return totalMap;
     }
 
+    public List<String> toList() {
+
+        List<String> totalList = new ArrayList<>();
+
+        totalList.add(String.valueOf(this.totalProfit/HUNDRED));
+        totalList.add(String.valueOf(this.totalIncome/HUNDRED));
+        totalList.add(String.valueOf(this.totalExpense/HUNDRED));
+        totalList.add(String.valueOf(this.totalProcedures));
+        totalList.add(this.totalManicure + "\\" + this.totalPedicure);
+        totalList.add(String.valueOf(this.uniqueClient));
+
+        return totalList;
+    }
+
     private int calculateIncome(List<IncomeEntity> incomeEntities) {
 
         int result = 0;

@@ -17,6 +17,7 @@ import java.time.LocalDate;
 import static app.constant.ConstantAttribute.MONTH;
 import static app.constant.ConstantAttribute.PHONE_NUMBER;
 import static app.constant.ConstantPage.ACCOUNT_MAIN_PAGE;
+import static app.constant.ConstantUtil.CURRENT;
 import static app.constant.ConstantUtil.MONTH_LIST;
 
 /**
@@ -61,7 +62,7 @@ public class LogInCommand implements Command {
 
         //Делается запрос в БД, запускается по сути процедура построения таблиц
         //TEST
-        //ПРЕДПОЛОЖИМ, что это было получено со стороны клиента:
+        //TODO ПРЕДПОЛОЖИМ, что это было получено со стороны клиента:
         LocalDate testDate = LocalDate.of(2021, 3, 8);
         String testPeriod = MONTH;
         //КОНЦОВКА ТЕСТА
@@ -69,18 +70,11 @@ public class LogInCommand implements Command {
 
         RepresentationProcessor repProcessor = new RepresentationProcessor();
 
-        repProcessor.collect(account.getIdAccount(), testDate, testPeriod);
+        repProcessor.collect(account.getIdAccount(), CURRENT, testDate, testPeriod);
 
         request.setAttribute("monthList", MONTH_LIST);
-
-        String jsonPeriodData;
-        ObjectMapper mapper = JsonMapper.builder().addModule(new JavaTimeModule()).build();
-        jsonPeriodData = mapper.writeValueAsString(repProcessor.getPeriodData());
-        logger.info(jsonPeriodData);
-
         request.setAttribute("periodData", repProcessor.getPeriodData());
-        request.setAttribute("totalData", repProcessor.getTotalData().toMap());
-
+        request.setAttribute("totalData", repProcessor.getTotalData().toList());
 
         return ACCOUNT_MAIN_PAGE;
     }

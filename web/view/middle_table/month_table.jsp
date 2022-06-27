@@ -11,7 +11,7 @@
         <div class="calendar-row">
             <c:forEach var="day" items="${week}">
                 <%--                ЗДЕСЬ В УСЛОВИИ (date.month-1) - т.к. месяцы в date читаются с 1--%>
-                <c:if test="${day.date.monthValue == date.month-3}">
+                <c:if test="${day.date.monthValue == requestScope.periodData[1][1].date.monthValue}">
                     <div id="cell" class="cell" onclick="dayData(${day.date.dayOfMonth})" >
                         <div class="date-cell">
                             <p>
@@ -35,7 +35,7 @@
 
                 </c:if>
 <%--                ЗДЕСЬ В УСЛОВИИ (date.month-1) - т.к. месяцы в date читаются с 1--%>
-                <c:if test="${day.date.monthValue != date.month-3}">
+                <c:if test="${day.date.monthValue != requestScope.periodData[1][1].date.monthValue}">
                     <div class="cell_grey">
                         <div class="date-cell_grey">
                             <p>

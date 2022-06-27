@@ -14,42 +14,50 @@ import java.time.format.DateTimeFormatter;
 
 import static app.constant.ConstantPage.ACCOUNT_MONTH_TABLE;
 import static app.constant.ConstantUtil.MONTH_LIST;
-import static app.constant.ConstantUtil.PREVIOUS;
 
-@Deprecated
-public class PreviousCommand implements Command{
+public class ChangePeriodCommand implements Command{
 
-    Logger logger = Logger.getLogger(PreviousCommand.class);
+    Logger logger = Logger.getLogger(ChangePeriodCommand.class);
 
     @Override
     public String execute(HttpServletRequest request, HttpServletResponse response) throws IOException {
 
-        logger.info("'previous'-command executing");
+        logger.info("'change_period'-command executing");
 
         logger.info(request.getParameter("userId"));
+        logger.info(request.getParameter("direction"));
         logger.info(request.getParameter("currentDate"));
         logger.info(request.getParameter("period"));
 
         String receivedId = request.getParameter("userId");
-        LocalDate receivedDate = LocalDate.parse(request.getParameter("currentDate"), DateTimeFormatter.ofPattern("yyyy-MM-dd")).minusMonths(1);
+        String direction = request.getParameter("direction");
+        LocalDate receivedDate = LocalDate.parse(request.getParameter("currentDate"));
         String receivedPeriod = request.getParameter("period");
+
         String jsonMonthList;
         String jsonPeriodData;
         String jsonTotalData;
+        String[] commonData;
+        String jsonCommonData;
 
         RepresentationProcessor representationProcessor = new RepresentationProcessor();
 
-        representationProcessor.collect(receivedId, PREVIOUS,receivedDate, receivedPeriod);
-        request.setAttribute("monthList", MONTH_LIST);
+        representationProcessor.collect(receivedId, direction, receivedDate, receivedPeriod);
 
         ObjectMapper mapper = JsonMapper.builder().addModule(new JavaTimeModule()).build();
         jsonPeriodData = mapper.writeValueAsString(representationProcessor.getPeriodData());
+        jsonTotalData = mapper.writeValueAsString(representationProcessor.getTotalData().toList());
+        jsonMonthList = mapper.writeValueAsString(MONTH_LIST);
+
+        commonData = new String[]{jsonMonthList, jsonPeriodData, jsonTotalData};
+        jsonCommonData = mapper.writeValueAsString(commonData);
+
+        logger.info(jsonMonthList);
         logger.info(jsonPeriodData);
+        logger.info(jsonTotalData);
 
-        request.setAttribute("periodData", representationProcessor.getPeriodData());
+        response.getWriter().write(jsonCommonData);
 
-        request.setAttribute("totalData", representationProcessor.getTotalData().toMap());
-
-        return ACCOUNT_MONTH_TABLE;
+        return jsonPeriodData;
     }
 }

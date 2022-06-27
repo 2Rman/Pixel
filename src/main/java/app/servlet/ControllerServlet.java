@@ -41,13 +41,18 @@ public class ControllerServlet extends HttpServlet {
         logger.info(request.getParameter(COMMAND) + "-command got");
 
         String currentCommand = request.getParameter(COMMAND);
+        String commandResponse = null;
 
         CommandDefineProcessor commandDefineProcessor = new CommandDefineProcessor();
 
         if (currentCommand != null) {
-            RequestDispatcher requestDispatcher = request.getRequestDispatcher(commandDefineProcessor.defineCommand(currentCommand).execute(request, response));
-            requestDispatcher.forward(request, response);
-
+            commandResponse = commandDefineProcessor.defineCommand(currentCommand).execute(request, response);
+            if (commandResponse.contains(".jsp")) {
+                RequestDispatcher requestDispatcher = request.getRequestDispatcher(commandResponse);
+                requestDispatcher.forward(request, response);
+            } else if (!commandResponse.contains(".jsp")) {
+                logger.info("Probably COMMAND returned something excluding '.jsp'");
+            }
         } else {
 
             logger.info("Return start-page");

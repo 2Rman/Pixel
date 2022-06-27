@@ -37,13 +37,15 @@ public class CommandDefineProcessor {
             case LOG_IN_COMMAND:
                 command = new LogInCommand();
                 break;
+            case CHANGE_PERIOD:
+                command = new ChangePeriodCommand();
+                break;
             case PREVIOUS:
                 command = new PreviousCommand();
                 break;
             default:
                 command = new EmptyCommand();
                 throw new IllegalStateException("Unexpected value: " + currentCommand);
-
         }
         return command;
     }
