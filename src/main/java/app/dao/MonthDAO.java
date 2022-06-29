@@ -39,11 +39,12 @@ public class MonthDAO implements AbstractDAO {
         Date dEnd = Date.valueOf(dateEnd.toString());
 
         Connection connection = ConnectionPool.getInstance().getConnection();
+        PreparedStatement preparedStatement = null;
 
         logger.info("Connection got");
 
         try {
-            PreparedStatement preparedStatement = connection.prepareStatement(GET_PERIOD_INCOME);
+            preparedStatement = connection.prepareStatement(GET_PERIOD_INCOME);
 
             preparedStatement.setString(1, id);
             preparedStatement.setDate(2, dStart);
@@ -62,6 +63,15 @@ public class MonthDAO implements AbstractDAO {
             }
         } catch (SQLException e) {
             e.printStackTrace();
+        } finally {
+            try {
+                if (preparedStatement != null) {
+                    preparedStatement.close();
+                }
+                connection.close();
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
         }
         return notes;
     }
@@ -84,11 +94,12 @@ public class MonthDAO implements AbstractDAO {
         Date dEnd = Date.valueOf(dateEnd.toString());
 
         Connection connection = ConnectionPool.getInstance().getConnection();
+        PreparedStatement preparedStatement = null;
 
         logger.info("Connection got");
 
         try {
-            PreparedStatement preparedStatement = connection.prepareStatement(GET_PERIOD_EXPENSE);
+            preparedStatement = connection.prepareStatement(GET_PERIOD_EXPENSE);
 
             preparedStatement.setString(1, id);
             preparedStatement.setDate(2, dStart);
@@ -106,6 +117,15 @@ public class MonthDAO implements AbstractDAO {
             }
         } catch (SQLException e) {
             e.printStackTrace();
+        } finally {
+            try {
+                if (preparedStatement != null) {
+                    preparedStatement.close();
+                }
+                connection.close();
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
         }
         return notes;
     }

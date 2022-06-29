@@ -32,11 +32,12 @@ public class IncomeDAO implements AbstractDAO {
         Date start = Date.valueOf(date.toString());
 
         Connection connection = ConnectionPool.getInstance().getConnection();
+        PreparedStatement preparedStatement = null;
 
         logger.info("Connection got");
 
         try {
-            PreparedStatement preparedStatement = connection.prepareStatement(GET_DAILY_INCOME);
+            preparedStatement = connection.prepareStatement(GET_DAILY_INCOME);
 
             preparedStatement.setString(1, id);
             preparedStatement.setDate(2, start);
@@ -54,6 +55,15 @@ public class IncomeDAO implements AbstractDAO {
             }
         } catch (SQLException e) {
             e.printStackTrace();
+        } finally {
+            try {
+                if (preparedStatement != null) {
+                    preparedStatement.close();
+                }
+                connection.close();
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
         }
         return notes;
     }
@@ -76,11 +86,12 @@ public class IncomeDAO implements AbstractDAO {
         Date dEnd = Date.valueOf(dateEnd.toString());
 
         Connection connection = ConnectionPool.getInstance().getConnection();
+        PreparedStatement preparedStatement = null;
 
         logger.info("Connection got");
 
         try {
-            PreparedStatement preparedStatement = connection.prepareStatement(GET_PERIOD_INCOME);
+            preparedStatement = connection.prepareStatement(GET_PERIOD_INCOME);
 
             preparedStatement.setString(1, id);
             preparedStatement.setDate(2, dStart);
@@ -99,6 +110,15 @@ public class IncomeDAO implements AbstractDAO {
             }
         } catch (SQLException e) {
             e.printStackTrace();
+        } finally {
+            try {
+                if (preparedStatement != null) {
+                    preparedStatement.close();
+                }
+                connection.close();
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
         }
         return notes;
     }
@@ -117,11 +137,12 @@ public class IncomeDAO implements AbstractDAO {
         List<IncomeEntity> incomeEntities = new ArrayList<>();
 
         Connection connection = ConnectionPool.getInstance().getConnection();
+        PreparedStatement preparedStatement = null;
 
         logger.info("Connection got");
 
         try {
-            PreparedStatement preparedStatement = connection.prepareStatement(GET_ALL_INCOME);
+            preparedStatement = connection.prepareStatement(GET_ALL_INCOME);
 
             preparedStatement.setString(1, id);
 
@@ -138,6 +159,15 @@ public class IncomeDAO implements AbstractDAO {
             }
         } catch (SQLException e) {
             e.printStackTrace();
+        } finally {
+            try {
+                if (preparedStatement != null) {
+                    preparedStatement.close();
+                }
+                connection.close();
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
         }
         return incomeEntities;
     }
@@ -156,11 +186,12 @@ public class IncomeDAO implements AbstractDAO {
         IncomeEntity incomeEntity = null;
 
         Connection connection = ConnectionPool.getInstance().getConnection();
+        PreparedStatement preparedStatement = null;
 
         logger.info("Connection got");
 
         try {
-            PreparedStatement preparedStatement = connection.prepareStatement(GET_INCOME_BY_ID);
+            preparedStatement = connection.prepareStatement(GET_INCOME_BY_ID);
 
             preparedStatement.setString(1, id);
 
@@ -179,6 +210,15 @@ public class IncomeDAO implements AbstractDAO {
             }
         } catch (SQLException e) {
             e.printStackTrace();
+        } finally {
+            try {
+                if (preparedStatement != null) {
+                    preparedStatement.close();
+                }
+                connection.close();
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
         }
         return incomeEntity;
     }
@@ -196,11 +236,12 @@ public class IncomeDAO implements AbstractDAO {
         IncomeEntity incomeEntity = null;
 
         Connection connection = ConnectionPool.getInstance().getConnection();
+        PreparedStatement preparedStatement = null;
 
         logger.info("Connection got");
 
         try {
-            PreparedStatement preparedStatement = connection.prepareStatement(GET_DATA_INCOME_BY_ID);
+            preparedStatement = connection.prepareStatement(GET_DATA_INCOME_BY_ID);
 
             preparedStatement.setString(1, id);
 
@@ -217,6 +258,15 @@ public class IncomeDAO implements AbstractDAO {
             }
         } catch (SQLException e) {
             e.printStackTrace();
+        } finally {
+            try {
+                if (preparedStatement != null) {
+                    preparedStatement.close();
+                }
+                connection.close();
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
         }
         return incomeEntity;
     }

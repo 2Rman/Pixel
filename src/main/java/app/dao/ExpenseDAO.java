@@ -32,11 +32,12 @@ public class ExpenseDAO implements AbstractDAO {
         Date start = Date.valueOf(date.toString());
 
         Connection connection = ConnectionPool.getInstance().getConnection();
+        PreparedStatement preparedStatement = null;
 
         logger.info("Connection got");
 
         try {
-            PreparedStatement preparedStatement = connection.prepareStatement(GET_DAILY_EXPENSE);
+            preparedStatement = connection.prepareStatement(GET_DAILY_EXPENSE);
 
             preparedStatement.setString(1, id);
             preparedStatement.setDate(2, start);
@@ -53,6 +54,15 @@ public class ExpenseDAO implements AbstractDAO {
             }
         } catch (SQLException e) {
             e.printStackTrace();
+        } finally {
+            try {
+                if (preparedStatement != null) {
+                    preparedStatement.close();
+                }
+                connection.close();
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
         }
         return expenseEntities;
     }
@@ -75,11 +85,12 @@ public class ExpenseDAO implements AbstractDAO {
         Date dEnd = Date.valueOf(dateEnd.toString());
 
         Connection connection = ConnectionPool.getInstance().getConnection();
+        PreparedStatement preparedStatement = null;
 
         logger.info("Connection got");
 
         try {
-            PreparedStatement preparedStatement = connection.prepareStatement(GET_PERIOD_EXPENSE);
+            preparedStatement = connection.prepareStatement(GET_PERIOD_EXPENSE);
 
             preparedStatement.setString(1, id);
             preparedStatement.setDate(2, dStart);
@@ -98,6 +109,15 @@ public class ExpenseDAO implements AbstractDAO {
             }
         } catch (SQLException e) {
             e.printStackTrace();
+        } finally {
+            try {
+                if (preparedStatement != null) {
+                    preparedStatement.close();
+                }
+                connection.close();
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
         }
         return expenseEntities;
     }
@@ -116,11 +136,12 @@ public class ExpenseDAO implements AbstractDAO {
         List<ExpenseEntity> expenseEntities = new ArrayList<>();
 
         Connection connection = ConnectionPool.getInstance().getConnection();
+        PreparedStatement preparedStatement = null;
 
         logger.info("Connection got");
 
         try {
-            PreparedStatement preparedStatement = connection.prepareStatement(GET_ALL_EXPENSE);
+            preparedStatement = connection.prepareStatement(GET_ALL_EXPENSE);
 
             preparedStatement.setString(1, id);
 
@@ -136,6 +157,15 @@ public class ExpenseDAO implements AbstractDAO {
             }
         } catch (SQLException e) {
             e.printStackTrace();
+        } finally {
+            try {
+                if (preparedStatement != null) {
+                    preparedStatement.close();
+                }
+                connection.close();
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
         }
         return expenseEntities;
     }
@@ -154,11 +184,12 @@ public class ExpenseDAO implements AbstractDAO {
         ExpenseEntity expenseEntity = null;
 
         Connection connection = ConnectionPool.getInstance().getConnection();
+        PreparedStatement preparedStatement = null;
 
         logger.info("Connection got");
 
         try {
-            PreparedStatement preparedStatement = connection.prepareStatement(GET_EXPENSE_BY_ID);
+            preparedStatement = connection.prepareStatement(GET_EXPENSE_BY_ID);
 
             preparedStatement.setString(1, id);
 
@@ -175,6 +206,15 @@ public class ExpenseDAO implements AbstractDAO {
             }
         } catch (SQLException e) {
             e.printStackTrace();
+        } finally {
+            try {
+                if (preparedStatement != null) {
+                    preparedStatement.close();
+                }
+                connection.close();
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
         }
         return expenseEntity;
     }
@@ -192,11 +232,12 @@ public class ExpenseDAO implements AbstractDAO {
         ExpenseEntity expenseEntity = null;
 
         Connection connection = ConnectionPool.getInstance().getConnection();
+        PreparedStatement preparedStatement = null;
 
         logger.info("Connection got");
 
         try {
-            PreparedStatement preparedStatement = connection.prepareStatement(GET_DATA_EXPENSE_BY_ID);
+            preparedStatement = connection.prepareStatement(GET_DATA_EXPENSE_BY_ID);
 
             preparedStatement.setString(1, id);
 
@@ -211,6 +252,15 @@ public class ExpenseDAO implements AbstractDAO {
             }
         } catch (SQLException e) {
             e.printStackTrace();
+        } finally {
+            try {
+                if (preparedStatement != null) {
+                    preparedStatement.close();
+                }
+                connection.close();
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
         }
         return expenseEntity;
     }

@@ -36,11 +36,12 @@ public class ExpenseTypeDAO implements AbstractDAO {
         List<ExpenseTypeEntity> expenseTypeEntities = new ArrayList<>();
 
         Connection connection = ConnectionPool.getInstance().getConnection();
+        PreparedStatement preparedStatement = null;
 
         logger.info("Connection got");
 
         try {
-            PreparedStatement preparedStatement = connection.prepareStatement(GET_ALL_EXPENSE_TYPES);
+            preparedStatement = connection.prepareStatement(GET_ALL_EXPENSE_TYPES);
 
             preparedStatement.setString(1, id);
 
@@ -54,6 +55,15 @@ public class ExpenseTypeDAO implements AbstractDAO {
             }
         } catch (SQLException e) {
             e.printStackTrace();
+        } finally {
+            try {
+                if (preparedStatement != null) {
+                    preparedStatement.close();
+                }
+                connection.close();
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
         }
         return expenseTypeEntities;
     }
@@ -72,11 +82,12 @@ public class ExpenseTypeDAO implements AbstractDAO {
         ExpenseTypeEntity expenseTypeEntity = null;
 
         Connection connection = ConnectionPool.getInstance().getConnection();
+        PreparedStatement preparedStatement = null;
 
         logger.info("Connection got");
 
         try {
-            PreparedStatement preparedStatement = connection.prepareStatement(GET_SERVICE_TYPE_BY_ID);
+            preparedStatement = connection.prepareStatement(GET_SERVICE_TYPE_BY_ID);
 
             preparedStatement.setString(1, id);
 
@@ -90,6 +101,15 @@ public class ExpenseTypeDAO implements AbstractDAO {
             }
         } catch (SQLException e) {
             e.printStackTrace();
+        } finally {
+            try {
+                if (preparedStatement != null) {
+                    preparedStatement.close();
+                }
+                connection.close();
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
         }
         return expenseTypeEntity;
     }

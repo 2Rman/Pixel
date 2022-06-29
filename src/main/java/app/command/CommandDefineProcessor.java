@@ -40,9 +40,6 @@ public class CommandDefineProcessor {
             case CHANGE_PERIOD:
                 command = new ChangePeriodCommand();
                 break;
-            case PREVIOUS:
-                command = new PreviousCommand();
-                break;
             default:
                 command = new EmptyCommand();
                 throw new IllegalStateException("Unexpected value: " + currentCommand);

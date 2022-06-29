@@ -35,11 +35,12 @@ public class ServiceTypeDAO implements AbstractDAO{
         List<ServiceTypeEntity> serviceTypeEntities = new ArrayList<>();
 
         Connection connection = ConnectionPool.getInstance().getConnection();
+        PreparedStatement preparedStatement = null;
 
         logger.info("Connection got");
 
         try {
-            PreparedStatement preparedStatement = connection.prepareStatement(GET_ALL_INCOME_TYPES);
+            preparedStatement = connection.prepareStatement(GET_ALL_INCOME_TYPES);
 
             preparedStatement.setString(1, id);
 
@@ -53,6 +54,15 @@ public class ServiceTypeDAO implements AbstractDAO{
             }
         } catch (SQLException e) {
             e.printStackTrace();
+        } finally {
+            try {
+                if (preparedStatement != null) {
+                    preparedStatement.close();
+                }
+                connection.close();
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
         }
         return serviceTypeEntities;
     }
@@ -71,11 +81,12 @@ public class ServiceTypeDAO implements AbstractDAO{
         ServiceTypeEntity serviceTypeEntity = null;
 
         Connection connection = ConnectionPool.getInstance().getConnection();
+        PreparedStatement preparedStatement = null;
 
         logger.info("Connection got");
 
         try {
-            PreparedStatement preparedStatement = connection.prepareStatement(GET_EXPENSE_TYPE_BY_ID);
+            preparedStatement = connection.prepareStatement(GET_EXPENSE_TYPE_BY_ID);
 
             preparedStatement.setString(1, id);
 
@@ -89,6 +100,15 @@ public class ServiceTypeDAO implements AbstractDAO{
             }
         } catch (SQLException e) {
             e.printStackTrace();
+        } finally {
+            try {
+                if (preparedStatement != null) {
+                    preparedStatement.close();
+                }
+                connection.close();
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
         }
         return serviceTypeEntity;
     }

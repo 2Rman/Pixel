@@ -9,11 +9,9 @@ import org.apache.log4j.Logger;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
-
-import static app.constant.ConstantPage.ACCOUNT_MONTH_TABLE;
-import static app.constant.ConstantUtil.MONTH_LIST;
 
 public class ChangePeriodCommand implements Command{
 
@@ -28,13 +26,14 @@ public class ChangePeriodCommand implements Command{
         logger.info(request.getParameter("direction"));
         logger.info(request.getParameter("currentDate"));
         logger.info(request.getParameter("period"));
+        logger.info(request.getParameter("dataType"));
 
         String receivedId = request.getParameter("userId");
         String direction = request.getParameter("direction");
         LocalDate receivedDate = LocalDate.parse(request.getParameter("currentDate"));
         String receivedPeriod = request.getParameter("period");
 
-        String jsonMonthList;
+        String jsonRefDate;
         String jsonPeriodData;
         String jsonTotalData;
         String[] commonData;
@@ -45,14 +44,18 @@ public class ChangePeriodCommand implements Command{
         representationProcessor.collect(receivedId, direction, receivedDate, receivedPeriod);
 
         ObjectMapper mapper = JsonMapper.builder().addModule(new JavaTimeModule()).build();
+
+        DateFormat df = new SimpleDateFormat("yyyy-MM-dd"); //Создание формата даты
+        mapper.setDateFormat(df);                                  //Назначение формата mapper
+
         jsonPeriodData = mapper.writeValueAsString(representationProcessor.getPeriodData());
         jsonTotalData = mapper.writeValueAsString(representationProcessor.getTotalData().toList());
-        jsonMonthList = mapper.writeValueAsString(MONTH_LIST);
+        jsonRefDate = mapper.writeValueAsString(representationProcessor.getPeriodData()[1][0].getDate());
 
-        commonData = new String[]{jsonMonthList, jsonPeriodData, jsonTotalData};
+        commonData = new String[]{jsonRefDate, jsonPeriodData, jsonTotalData};
         jsonCommonData = mapper.writeValueAsString(commonData);
 
-        logger.info(jsonMonthList);
+        logger.info(jsonRefDate);
         logger.info(jsonPeriodData);
         logger.info(jsonTotalData);
 

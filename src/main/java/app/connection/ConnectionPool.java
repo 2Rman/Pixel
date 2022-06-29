@@ -50,6 +50,8 @@ public class ConnectionPool {
             connection = dataSource.getConnection();
         } catch (NamingException | SQLException e) {
             e.printStackTrace();
+            logger.error("connection to DB error");
+//            throw new Exception("connection to DB error");
         }
 
         logger.info("Connection to DB got");

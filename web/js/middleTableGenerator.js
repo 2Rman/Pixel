@@ -1,4 +1,5 @@
 function generateTable(pData) {
+
     let tablePlace = document.getElementById('mainTablePlace');
 
     let monthTable = document.createElement("div");
@@ -12,21 +13,23 @@ function generateTable(pData) {
         monthTable.append(week);
 
         for (let j = 0; j < pData[i].length; j++) {
-            if (pData[i][j]["date"][1] === pData[1][1]["date"][1]) {
+            // if (pData[i][j]["date"][1] === pData[1][1]["date"][1]) {
+            if (new Date(pData[i][j]["date"]).getMonth() === new Date(pData[1][1]["date"]).getMonth()) {
                 let day = document.createElement("div");
                 let dayData = document.createElement("div");
                 let dayNum = document.createElement("p");
 
                 day.className = "cell";
                 day.onclick = function() {
-                        alert('It\'s ' + pData[1][1]["date"][1] + " day!")
+                        alert('It\'s ' + new Date(pData[1][1]["date"]).getDate() + " day!")
                     };
                 dayData.className = "date-cell"
 
                 week.append(day);
                 day.prepend(dayData);
                 dayData.prepend(dayNum);
-                dayNum.innerText = pData[i][j]["date"][2];
+                // dayNum.innerText = pData[i][j]["date"][2];
+                dayNum.innerText = new Date(pData[i][j]["date"]).getDate().toString();
 
                 let linesCell = document.createElement("div");
                 linesCell.className = "lines-cell"
@@ -61,7 +64,7 @@ function generateTable(pData) {
                 week.append(day);
                 day.prepend(dayData);
                 dayData.prepend(dayNum);
-                dayNum.innerText = pData[i][j]["date"][2];
+                dayNum.innerText = new Date(pData[i][j]["date"]).getDate().toString();
             }
         }
     }

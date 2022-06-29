@@ -14,11 +14,8 @@
     <link rel="stylesheet" type="text/css" href="../../css/bottom/info_table.css">
     <link rel="stylesheet" type="text/css" href="../../css/bottom/bottom_buttons.css">
 
+
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-    <script src="../../js/middleTableGenerator.js"></script>
-    <script src="../../js/upperButtonsGenerator.js"></script>
-    <script src="../../js/totalDataTableGenerator.js"></script>
-    <script src="../../js/periodChanger.js"></script>
     <script src="../../js/constant.js"></script>
 </head>
 <body>
@@ -38,3 +35,9 @@
 
 </body>
 </html>
+
+<script src="../../js/middleTableGenerator.js"></script>
+<script src="../../js/upperButtonsGenerator.js"></script>
+<script src="../../js/totalDataTableGenerator.js"></script>
+<script src="../../js/periodChanger.js"></script>
+
