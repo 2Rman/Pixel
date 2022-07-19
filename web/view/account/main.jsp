@@ -11,12 +11,14 @@
     <link rel="stylesheet" type="text/css" href="../../css/common/header.css">
     <link rel="stylesheet" type="text/css" href="../../css/middle/middle_container.css">
     <link rel="stylesheet" type="text/css" href="../../css/middle/cell.css">
+    <link rel="stylesheet" type="text/css" href="../../css/middle/day.css">
     <link rel="stylesheet" type="text/css" href="../../css/bottom/info_table.css">
     <link rel="stylesheet" type="text/css" href="../../css/bottom/bottom_buttons.css">
 
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <script src="../../js/constant.js"></script>
+
 </head>
 <body>
 
@@ -26,7 +28,9 @@
         <jsp:include page="../common/middle_buttons.jsp"/>
     </div>
     <div id="mainTablePlace">
+<%--        <jsp:include page="../middle_table/month_table.jsp"/>--%>
         <jsp:include page="../middle_table/month_table.jsp"/>
+<%--    <jsp:include page="../middle_table/day.jsp"/>--%>
     </div>
     <div id="totalDataPlace">
         <jsp:include page="../bottom_items/info_table.jsp"/>
@@ -40,4 +44,6 @@
 <script src="../../js/upperButtonsGenerator.js"></script>
 <script src="../../js/totalDataTableGenerator.js"></script>
 <script src="../../js/periodChanger.js"></script>
+<script src="../../js/middleDayGenerator.js"></script>
+
 

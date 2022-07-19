@@ -5,6 +5,8 @@ import lombok.Data;
 import java.sql.Date;
 import java.util.UUID;
 
+import static app.constant.ConstantUtil.HUNDRED;
+
 /**
  * Класс реализации одной записи расходов в БД
  */
@@ -22,7 +24,7 @@ public class ExpenseEntity extends Note {
     public ExpenseEntity(Date date, String typeNote, int amount, String comment) {
         this.setDate(date.toLocalDate());
         this.setNoteType(typeNote);
-        this.setAmount(amount);
+        this.setAmount(amount/HUNDRED);
         this.setCommentary(comment);
     }
 
@@ -40,7 +42,7 @@ public class ExpenseEntity extends Note {
         this.setId(idExpense);
         this.setDate(date.toLocalDate());
         this.setIdNoteType(idExpenseType);
-        this.setAmount(amount);
+        this.setAmount(amount/HUNDRED);
         this.setIdAccount(idAccount);
         this.setCommentary(commentary);
     }

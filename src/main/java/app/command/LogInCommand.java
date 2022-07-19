@@ -75,7 +75,7 @@ public class LogInCommand implements Command {
         request.setAttribute("monthList", MONTH_LIST);
         request.setAttribute("periodData", repProcessor.getPeriodData());
         request.setAttribute("totalData", repProcessor.getTotalData().toList());
-        request.setAttribute("refDate", repProcessor.getPeriodData()[1][0].getDate());
+        request.setAttribute("refDate", repProcessor.getPeriodData()[7].getDate()); //7 - точно один из дней месяца, который нужно отобразить
 
         return ACCOUNT_MAIN_PAGE;
     }

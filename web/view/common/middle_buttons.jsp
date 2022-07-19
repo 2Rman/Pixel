@@ -7,11 +7,11 @@
 
 <div id="commonMiddle" class="common_middle">
     <div class="upper_buttons">
-        <a id = "left" class="left" onclick="changePeriod('previous','${userId}','${currentDateGlobal}')">
+        <a id = "left" class="left" onclick="changePeriod('previous','${userId}','${currentDateGlobal}','MONTH')">
             <img class="arrow" src="../../image/Arrow.png" alt="Left">
         </a>
-        <input name="command" type="button" class="btn_center" value="${requestScope.monthList[requestScope.periodData[1][1].date.monthValue-1]} ${requestScope.periodData[1][1].date.year}">
-        <a id = "right" onclick="changePeriod('next', '${userId}', '${currentDateGlobal}')">
+        <input name="command" type="button" class="btn_center" onclick="alert('DO SOME COMMAND!')" value="${requestScope.monthList[requestScope.periodData[7].date.monthValue-1]} ${requestScope.periodData[7].date.year}">
+        <a id = "right" onclick="changePeriod('next', '${userId}', '${currentDateGlobal}','MONTH')">
             <img class="arrow" src="../../image/Arrow.png" alt="Right">
         </a>
     </div>

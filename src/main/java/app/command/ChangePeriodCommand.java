@@ -13,6 +13,9 @@ import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 
+import static app.constant.ConstantAttribute.DAY;
+import static app.constant.ConstantAttribute.MONTH;
+
 public class ChangePeriodCommand implements Command{
 
     Logger logger = Logger.getLogger(ChangePeriodCommand.class);
@@ -50,7 +53,18 @@ public class ChangePeriodCommand implements Command{
 
         jsonPeriodData = mapper.writeValueAsString(representationProcessor.getPeriodData());
         jsonTotalData = mapper.writeValueAsString(representationProcessor.getTotalData().toList());
-        jsonRefDate = mapper.writeValueAsString(representationProcessor.getPeriodData()[1][0].getDate());
+
+        //TODO вынести в отедльный метод
+        switch (receivedPeriod.toLowerCase()) {
+            case DAY:
+                jsonRefDate = mapper.writeValueAsString(representationProcessor.getPeriodData()[0].getDate());
+                break;
+            case MONTH:
+                jsonRefDate = mapper.writeValueAsString(representationProcessor.getPeriodData()[7].getDate()); // 7 - точно один из дней которые нужно отобразить
+                break;
+            default:
+                jsonRefDate = mapper.writeValueAsString(representationProcessor.getPeriodData()[7].getDate()); // 7 - точно один из дней которые нужно отобразить
+        }
 
         commonData = new String[]{jsonRefDate, jsonPeriodData, jsonTotalData};
         jsonCommonData = mapper.writeValueAsString(commonData);
@@ -59,6 +73,7 @@ public class ChangePeriodCommand implements Command{
         logger.info(jsonPeriodData);
         logger.info(jsonTotalData);
 
+        response.setCharacterEncoding("UTF-8");
         response.getWriter().write(jsonCommonData);
 
         return jsonPeriodData;

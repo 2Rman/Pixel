@@ -1,35 +1,37 @@
 function generateTable(pData) {
 
+    console.log("generateTable is working")
+
     let tablePlace = document.getElementById('mainTablePlace');
 
-    let monthTable = document.createElement("div");
-    monthTable.className = "calendar-table";
-    monthTable.id = "monthTable";
-    tablePlace.prepend(monthTable);
+    let middleTable = document.createElement("div");
+    middleTable.className = "calendar-table";
+    middleTable.id = "middleTable";
+    tablePlace.prepend(middleTable);
 
-    for (let i = 0; i < pData.length; i++) {
+    for (let i = 0; i < (pData.length / 7); i++) {
+
         let week = document.createElement("div");
         week.className = "calendar-row";
-        monthTable.append(week);
+        middleTable.append(week);
 
-        for (let j = 0; j < pData[i].length; j++) {
-            // if (pData[i][j]["date"][1] === pData[1][1]["date"][1]) {
-            if (new Date(pData[i][j]["date"]).getMonth() === new Date(pData[1][1]["date"]).getMonth()) {
+        for (let j = 0; j < 7; j++) {
+            if (new Date(pData[i * 7 + j]["date"]).getMonth() === new Date(pData[7]["date"]).getMonth()) {
                 let day = document.createElement("div");
                 let dayData = document.createElement("div");
                 let dayNum = document.createElement("p");
 
                 day.className = "cell";
-                day.onclick = function() {
-                        alert('It\'s ' + new Date(pData[1][1]["date"]).getDate() + " day!")
-                    };
+                day.onclick = function () {
+                    document.getElementById("middleTable").remove()
+                    generateDay(pData[i * 7 + j]["date"]);
+                };
                 dayData.className = "date-cell"
 
                 week.append(day);
                 day.prepend(dayData);
                 dayData.prepend(dayNum);
-                // dayNum.innerText = pData[i][j]["date"][2];
-                dayNum.innerText = new Date(pData[i][j]["date"]).getDate().toString();
+                dayNum.innerText = new Date(pData[i * 7 + j]["date"]).getDate().toString();
 
                 let linesCell = document.createElement("div");
                 linesCell.className = "lines-cell"
@@ -39,7 +41,7 @@ function generateTable(pData) {
                 greenLines.className = "green_lines";
                 linesCell.append(greenLines);
 
-                for (let inc = 0; inc < pData[i][j]["incomeList"].length; inc++) {
+                for (let inc = 0; inc < pData[i * 7 + j]["incomeList"].length; inc++) {
                     let greenLine = document.createElement("div");
                     greenLine.className = "green_line";
                     greenLines.append(greenLine);
@@ -49,7 +51,7 @@ function generateTable(pData) {
                 redLines.className = "red_lines";
                 linesCell.append(redLines);
 
-                for (let exp = 0; exp < pData[i][j]["expenseList"].length; exp++) {
+                for (let exp = 0; exp < pData[i * 7 + j]["expenseList"].length; exp++) {
                     let redLine = document.createElement("div");
                     redLine.className = "red_line";
                     redLines.append(redLine);
@@ -64,7 +66,7 @@ function generateTable(pData) {
                 week.append(day);
                 day.prepend(dayData);
                 dayData.prepend(dayNum);
-                dayNum.innerText = new Date(pData[i][j]["date"]).getDate().toString();
+                dayNum.innerText = new Date(pData[i * 7 + j]["date"]).getDate().toString();
             }
         }
     }

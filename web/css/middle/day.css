@@ -1,0 +1,128 @@
+.day_common {
+    position: relative;
+    width: 100%;
+    height: 46em;
+    margin-top: 2em;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.sub-table {
+    position: relative;
+    width: 90%;
+    height: 22em;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.sub-table_name {
+    position: relative;
+    align-content: center;
+    font-size: 2.5em;
+    font-weight: 800;
+    margin-top: 0.2em;
+    margin-bottom: 0em;
+}
+
+.column_place {
+    position: relative;
+    width: 100%;
+    height: 70%;
+    display: flex;
+    flex-direction: row;
+}
+
+.notes {
+    position: relative;
+    height: 91%;
+    display: flex;
+    flex-direction: column;
+    border: medium solid #9e9e9e;
+    border-radius: 0.5em;
+    border-collapse: collapse;
+    background-color: #ffffff;
+    font-size: 1.5em;
+    font-weight: 700;
+}
+
+.incomes {
+    width: 80%;
+}
+
+.expenses {
+    width: 88%;
+}
+
+.note {
+    margin-top: 0.2em;
+    margin-bottom: 0.2em;
+    margin-left: 1em;
+}
+
+.desc_type {
+    font-size: 1.55em;
+    font-weight: 700;
+    margin-top: 0.1em;
+    margin-bottom: 0.1em;
+    text-align: center;
+}
+
+.desc_amount {
+    font-size: 1em;
+    font-weight: 700;
+    margin-top: 0.1em;
+    margin-bottom: 0.1em;
+    text-align: center;
+}
+
+.types {
+    width: 8%;
+    height: 91%;
+    border: medium solid #9e9e9e;
+    border-radius: 0.5em;
+    border-collapse: collapse;
+    background-color: #ffffff;
+    text-align: center;
+    font-weight: 700;
+    font-size: 1.1em;
+}
+
+.amount {
+    width: 8%;
+    height: 91%;
+    border: medium solid #9e9e9e;
+    border-radius: 0.5em;
+    border-collapse: collapse;
+    background-color: #ffffff;
+    font-size: 1.7em;
+    font-weight: 700;
+}
+
+.button_place {
+    position: relative;
+    width: 100%;
+    height: 15%;
+    text-align: center;
+    margin-top: 0em;
+}
+
+.button {
+    position: relative;
+    width: 50%;
+    height: 100%;
+    border: medium solid #9e9e9e;
+    border-radius: 0.5em;
+    border-collapse: collapse;
+    font-size: 1.5em;
+    font-weight: 700;
+}
+
+.green {
+    background-color: #a7d28e;
+}
+
+.red {
+    background-color: #db8291;
+}

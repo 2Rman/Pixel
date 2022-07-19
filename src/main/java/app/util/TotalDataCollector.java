@@ -41,7 +41,7 @@ public class TotalDataCollector {
     }
 
     /**
-     * Метод для возвращение сгруппированной информации о расходах, доходах и записях за период
+     * Метод для возвращения сгруппированной информации о расходах, доходах и записях за период
      *
      * @return HashMap фиксированного размера
      */
@@ -49,9 +49,9 @@ public class TotalDataCollector {
 
         Map<String, String> totalMap = new HashMap<>();
 
-        totalMap.put(TOTAL_TABLE_ITEMS[0], String.valueOf(this.totalProfit/HUNDRED));
-        totalMap.put(TOTAL_TABLE_ITEMS[1], String.valueOf(this.totalIncome/HUNDRED));
-        totalMap.put(TOTAL_TABLE_ITEMS[2], String.valueOf(this.totalExpense/HUNDRED));
+        totalMap.put(TOTAL_TABLE_ITEMS[0], String.valueOf(this.totalProfit));
+        totalMap.put(TOTAL_TABLE_ITEMS[1], String.valueOf(this.totalIncome));
+        totalMap.put(TOTAL_TABLE_ITEMS[2], String.valueOf(this.totalExpense));
         totalMap.put(TOTAL_TABLE_ITEMS[3], String.valueOf(this.totalProcedures));
         totalMap.put(TOTAL_TABLE_ITEMS[4], (this.totalManicure + "\\" + this.totalPedicure));
         totalMap.put(TOTAL_TABLE_ITEMS[5], String.valueOf(this.uniqueClient));
@@ -63,9 +63,9 @@ public class TotalDataCollector {
 
         List<String> totalList = new ArrayList<>();
 
-        totalList.add(String.valueOf(this.totalProfit/HUNDRED));
-        totalList.add(String.valueOf(this.totalIncome/HUNDRED));
-        totalList.add(String.valueOf(this.totalExpense/HUNDRED));
+        totalList.add(String.valueOf(this.totalProfit));
+        totalList.add(String.valueOf(this.totalIncome));
+        totalList.add(String.valueOf(this.totalExpense));
         totalList.add(String.valueOf(this.totalProcedures));
         totalList.add(this.totalManicure + "\\" + this.totalPedicure);
         totalList.add(String.valueOf(this.uniqueClient));

@@ -6,6 +6,8 @@ import java.sql.Date;
 import java.time.LocalDate;
 import java.util.UUID;
 
+import static app.constant.ConstantUtil.HUNDRED;
+
 /**
  * Класс реализации одной записи доходов в БД
  */
@@ -14,6 +16,7 @@ public class IncomeEntity extends Note {
 
     private String idClient; //id клиента
     private String client; //Имя и фамилия клиента в одной строке
+    private int amount;
 
     /**
      * Конструктор использующийся для хранения сущности после запроса в БД
@@ -27,7 +30,7 @@ public class IncomeEntity extends Note {
     public IncomeEntity(Date date, String typeNote, int amount, String client, String commentary) {
         this.setDate(date.toLocalDate());
         this.setNoteType(typeNote);
-        this.setAmount(amount);
+        this.setAmount(amount/HUNDRED);
         this.client = client;
         this.setCommentary(commentary);
     }
@@ -47,7 +50,7 @@ public class IncomeEntity extends Note {
         this.setId(idIncome);
         this.setDate(date.toLocalDate());
         this.setIdNoteType(idServiceType);
-        this.setAmount(amount);
+        this.setAmount(amount/HUNDRED);
         this.idClient = idClient;
         this.setIdAccount(idAccount);
         this.setCommentary(commentary);

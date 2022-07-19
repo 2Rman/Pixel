@@ -16,6 +16,7 @@ import static app.constant.ConstantUtil.*;
 /**
  * Утилитарный класс, предназначенный для сбора информации перед отправкой на клиентскую сторону
  */
+
 @Data
 public class RepresentationProcessor {
 
@@ -26,7 +27,10 @@ public class RepresentationProcessor {
     TotalDataCollector totalData;
 
     LocalDate[][] table;
-    DayEntity[][] periodData;
+    DayEntity[] periodData;
+
+    private List<IncomeEntity> incomeEntities;
+    private List<ExpenseEntity> expenseEntities;
 
     /**
      * Метод, собирающий воедино всю информацию, для передачи на сторону клиента. Универсальна с точки зрения
@@ -44,6 +48,8 @@ public class RepresentationProcessor {
         switch (receivedPeriod.toLowerCase()) {
             case DAY: {
                 period =  PeriodDefiner.calculateDay(receivedDate, direction);
+                getDAOData(id, period[0], period[1]);
+                periodData = tableFactory.buildUserDay(period[0], incomeEntities, expenseEntities);
                 break;
             }
             case WEEK: {
@@ -52,6 +58,9 @@ public class RepresentationProcessor {
             }
             case MONTH: {
                 period = PeriodDefiner.calculateMonth(receivedDate, direction);
+                generateTable(direction, receivedDate);
+                getDAOData(id, period[0], period[1]);
+                periodData = tableFactory.buildUserMonth(table, incomeEntities, expenseEntities);
                 break;
             }
             case YEAR: {
@@ -67,10 +76,11 @@ public class RepresentationProcessor {
             }
         }
 
-        List<IncomeEntity> incomeEntities = incomeDAO.getPeriodIncome(id, period[0], period[1]);
-        List<ExpenseEntity> expenseEntities = expenseDAO.getPeriodExpense(id, period[0], period[1]);
+        totalData = new TotalDataCollector(incomeEntities, expenseEntities);
 
-        //TODO поменять на нормальное представление (а что это значит... уже хз)
+    }
+
+    private void generateTable(String direction, LocalDate receivedDate) {
         if (direction.equals(PREVIOUS)) {
             table = calendarGenerator.getCalendarValues(receivedDate.minusMonths(1));
         } else if (direction.equals(NEXT)) {
@@ -78,10 +88,10 @@ public class RepresentationProcessor {
         } else if (direction.equals(CURRENT)){
             table = calendarGenerator.getCalendarValues(receivedDate);
         }
+    }
 
-        periodData = tableFactory.buildUserMonth(table, incomeEntities, expenseEntities);
-
-        totalData = new TotalDataCollector(incomeEntities, expenseEntities);
-
+    private void getDAOData(String id, LocalDate start, LocalDate end) {
+        incomeEntities = incomeDAO.getPeriodIncome(id, start, end);
+        expenseEntities = expenseDAO.getPeriodExpense(id, start, end);
     }
 }
