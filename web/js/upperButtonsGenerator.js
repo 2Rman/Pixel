@@ -35,8 +35,7 @@ function generateUpperButtons(pDataTable, userId, refDate, period) {
     let centerButton = document.createElement("input");
     centerButton.className = "btn_center";
     centerButton.type = "button";
-    //TODO добавить условие по периоду (день полная дата; неделя, месяц - месяц, год; год - год)
-    centerButton.value = MONTH_NAMES[new Date(rDate).getMonth()] + " " + new Date(rDate).getFullYear();
+    centerButton.value = defineText(rDate, period);
     upperButtons.append(centerButton);
 
     //-------------ГЕНЕРАЦИЯ КНОПКИ "ВПРАВО"----------------------------
@@ -51,4 +50,21 @@ function generateUpperButtons(pDataTable, userId, refDate, period) {
     imgR.className = "arrow";
     imgR.src = "../image/Arrow.png";
     right.append(imgR);
+}
+
+function defineText(rDate, period) {
+    switch (period) {
+        case "DAY": {
+            return new Date(rDate).getDate() + " " + MONTH_NAMES[new Date(rDate).getMonth()] + " " + new Date(rDate).getFullYear();
+        }
+        case "WEEK": {
+            return MONTH_NAMES[new Date(rDate).getMonth()] + " " + new Date(rDate).getFullYear();
+        }
+        case "MONTH": {
+            return MONTH_NAMES[new Date(rDate).getMonth()] + " " + new Date(rDate).getFullYear();
+        }
+        case "YEAR": {
+            return new Date(rDate).getFullYear();
+        }
+    }
 }

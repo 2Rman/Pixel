@@ -1,4 +1,4 @@
-function generateTable(pData) {
+function generateTable(pData, id) {
 
     console.log("generateTable is working")
 
@@ -23,8 +23,10 @@ function generateTable(pData) {
 
                 day.className = "cell";
                 day.onclick = function () {
-                    document.getElementById("middleTable").remove()
-                    generateDay(pData[i * 7 + j]["date"]);
+                    // let rDate = document.getElementById("upperButtonsPlace").getAttribute("referenceDate");
+                    // document.getElementById("middleTable").remove()
+                    // generateDay(pData[i * 7 + j]["date"]);
+                    changePeriod("current", id,pData[i * 7 + j]["date"], "DAY");
                 };
                 dayData.className = "date-cell"
 
