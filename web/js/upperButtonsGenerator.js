@@ -33,9 +33,14 @@ function generateUpperButtons(pDataTable, userId, refDate, period) {
 
     //-------------ГЕНЕРАЦИЯ ЦЕНТРАЛЬНОЙ КНОПКИ----------------------------
     let centerButton = document.createElement("input");
+    centerButton.id = "centerButton";
     centerButton.className = "btn_center";
     centerButton.type = "button";
     centerButton.value = defineText(rDate, period);
+    genPeriodPopup(userId, rDate);
+    centerButton.onclick = function () {
+        document.querySelector("dialog").showModal();
+    }
     upperButtons.append(centerButton);
 
     //-------------ГЕНЕРАЦИЯ КНОПКИ "ВПРАВО"----------------------------
@@ -53,17 +58,17 @@ function generateUpperButtons(pDataTable, userId, refDate, period) {
 }
 
 function defineText(rDate, period) {
-    switch (period) {
-        case "DAY": {
+    switch (period.toLowerCase()) {
+        case PERIOD_VAR[0]: {
             return new Date(rDate).getDate() + " " + MONTH_NAMES[new Date(rDate).getMonth()] + " " + new Date(rDate).getFullYear();
         }
-        case "WEEK": {
+        case PERIOD_VAR[1]: {
             return MONTH_NAMES[new Date(rDate).getMonth()] + " " + new Date(rDate).getFullYear();
         }
-        case "MONTH": {
+        case PERIOD_VAR[2]: {
             return MONTH_NAMES[new Date(rDate).getMonth()] + " " + new Date(rDate).getFullYear();
         }
-        case "YEAR": {
+        case PERIOD_VAR[3]: {
             return new Date(rDate).getFullYear();
         }
     }

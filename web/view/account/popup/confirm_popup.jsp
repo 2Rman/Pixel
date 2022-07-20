@@ -4,7 +4,7 @@
 <html lang="en">
     <div class="popup">
         <div class="confirm_popup_text">
-            Вы успещно зарегистрировались в системе!
+            Отображение периодов
         </div>
     </div>
 </html>

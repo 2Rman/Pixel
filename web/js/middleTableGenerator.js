@@ -23,9 +23,6 @@ function generateTable(pData, id) {
 
                 day.className = "cell";
                 day.onclick = function () {
-                    // let rDate = document.getElementById("upperButtonsPlace").getAttribute("referenceDate");
-                    // document.getElementById("middleTable").remove()
-                    // generateDay(pData[i * 7 + j]["date"]);
                     changePeriod("current", id,pData[i * 7 + j]["date"], "DAY");
                 };
                 dayData.className = "date-cell"

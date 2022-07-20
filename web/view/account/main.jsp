@@ -9,6 +9,7 @@
     <link rel="stylesheet" type="text/css" href="../../css/common/rectangle.css">
     <link rel="stylesheet" type="text/css" href="../../css/common/page.css">
     <link rel="stylesheet" type="text/css" href="../../css/common/header.css">
+    <link rel="stylesheet" type="text/css" href="../../css/common/popup.css">
     <link rel="stylesheet" type="text/css" href="../../css/middle/middle_container.css">
     <link rel="stylesheet" type="text/css" href="../../css/middle/cell.css">
     <link rel="stylesheet" type="text/css" href="../../css/middle/day.css">
@@ -45,5 +46,6 @@
 <script src="../../js/totalDataTableGenerator.js"></script>
 <script src="../../js/periodChanger.js"></script>
 <script src="../../js/middleDayGenerator.js"></script>
+<script src="../../js/dialogGenerator.js"></script>
 
 

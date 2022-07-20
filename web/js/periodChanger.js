@@ -24,7 +24,8 @@ function changePeriod(direction, userId, refDate, period) {
             let rDate = parseDate(parsedData[0]);
 
             document.getElementById("upperButtonsPlace").setAttribute("referenceDate", parseDate(parsedData[0]));
-            generateUpperButtons(JSON.parse(parsedData[1]), userId, refDate, period);
+            generateUpperButtons(JSON.parse(parsedData[1]), userId, rDate, period);
+            console.log("here is the point")
             defineMiddleContent(period, JSON.parse(parsedData[1]), userId);
             generateTotalData(JSON.parse(parsedData[2]));
         },
@@ -54,16 +55,16 @@ function parseDate(date) {
 }
 
 function defineMiddleContent(period, data, id) {
-    switch (period) {
-        case 'DAY':
+    switch (period.toLowerCase()) {
+        case PERIOD_VAR[0]:
             generateDay(data);
             break;
-        case 'WEEK':
+        case PERIOD_VAR[1]:
             break;
-        case 'MONTH':
+        case PERIOD_VAR[2]:
             generateTable(data, id);
             break;
-        case 'YEAR':
+        case PERIOD_VAR[3]:
             break;
     }
 }
