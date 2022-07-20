@@ -19,8 +19,6 @@ function generateUpperButtons(pDataTable, userId, refDate, period) {
     left.id = "left";
     left.className = "left";
     left.onclick = function () {
-
-
         changePeriod("previous", userId, rDate, period);
     }
     upperButtons.append(left);
