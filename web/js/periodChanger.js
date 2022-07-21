@@ -1,6 +1,5 @@
 function changePeriod(direction, userId, refDate, period) {
 
-    console.log(refDate)
     console.log("changePeriod is working");
 
     $.ajax({

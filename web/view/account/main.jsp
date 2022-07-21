@@ -16,7 +16,6 @@
     <link rel="stylesheet" type="text/css" href="../../css/bottom/info_table.css">
     <link rel="stylesheet" type="text/css" href="../../css/bottom/bottom_buttons.css">
 
-
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <script src="../../js/constant.js"></script>
 
@@ -29,9 +28,7 @@
         <jsp:include page="../common/middle_buttons.jsp"/>
     </div>
     <div id="mainTablePlace">
-<%--        <jsp:include page="../middle_table/month_table.jsp"/>--%>
         <jsp:include page="../middle_table/month_table.jsp"/>
-<%--    <jsp:include page="../middle_table/day.jsp"/>--%>
     </div>
     <div id="totalDataPlace">
         <jsp:include page="../bottom_items/info_table.jsp"/>

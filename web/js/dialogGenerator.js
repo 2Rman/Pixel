@@ -1,6 +1,6 @@
 function genPeriodPopup(userId, rDate) {
 
-    let refDate = document.getElementById("upperButtonsPlace").getAttribute("referenceDate");
+    // let refDate = document.getElementById("upperButtonsPlace").getAttribute("referenceDate");
 
     let mainTable = document.getElementById("commonMiddle");
     let popup = document.createElement("dialog");
@@ -14,10 +14,13 @@ function genPeriodPopup(userId, rDate) {
         periodBut.innerText = PERIOD[c];
         periodBut.onclick = function () {
             document.querySelector("dialog").close();
-            console.log(refDate);
-            changePeriod("current", userId, refDate, PERIOD_VAR[c]);
+            changePeriod("current", userId, rDate, PERIOD_VAR[c]);
         }
         popup.append(periodBut);
     }
     mainTable.append(popup);
+}
+
+function showPeriodPopup() {
+    document.querySelector('dialog').showModal();
 }

@@ -17,8 +17,7 @@ import java.time.LocalDate;
 import static app.constant.ConstantAttribute.MONTH;
 import static app.constant.ConstantAttribute.PHONE_NUMBER;
 import static app.constant.ConstantPage.ACCOUNT_MAIN_PAGE;
-import static app.constant.ConstantUtil.CURRENT;
-import static app.constant.ConstantUtil.MONTH_LIST;
+import static app.constant.ConstantUtil.*;
 
 /**
  * Класс реализующий выполнение команды авторизации
@@ -73,6 +72,8 @@ public class LogInCommand implements Command {
         repProcessor.collect(account.getIdAccount(), CURRENT, testDate, testPeriod);
 
         request.setAttribute("monthList", MONTH_LIST);
+        request.setAttribute("periodItems", PERIOD);
+        request.setAttribute("periodVar", PERIOD_VAR);
         request.setAttribute("periodData", repProcessor.getPeriodData());
         request.setAttribute("totalData", repProcessor.getTotalData().toList());
         request.setAttribute("refDate", repProcessor.getPeriodData()[7].getDate()); //7 - точно один из дней месяца, который нужно отобразить
