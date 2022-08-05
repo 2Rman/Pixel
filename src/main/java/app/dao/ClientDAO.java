@@ -110,6 +110,12 @@ public class ClientDAO implements AbstractDAO<ClientEntity> {
         return clientEntity;
     }
 
+    /**
+     * Метод добавляет нового клиента в БД
+     *
+     * @param client полная сущность клиента
+     * @return успешно ли выполнена операция
+     */
     @Override
     public int create(ClientEntity client) {
 
@@ -144,6 +150,142 @@ public class ClientDAO implements AbstractDAO<ClientEntity> {
             }
         }
         return result;
+    }
+
+    /**
+     * Метод для получения списка клиентов авторизованного аккаунта по полученной маске "like"
+     *
+     * @param id   авторизованного аккаунта
+     * @param mask полученная маска, по которой нужно получить имена клиентов
+     * @return список клиентов по маске авторизованного аккаунта
+     */
+    public List<String> getLike(String id, String mask) {
+
+        logger.info("Getting clients like " + mask);
+
+        List<String> clientsLikeMask = new ArrayList<>();
+
+        Connection connection = ConnectionPool.getInstance().getConnection();
+        PreparedStatement preparedStatement = null;
+
+        logger.info("Connection got");
+
+        try {
+            preparedStatement = connection.prepareStatement(GET_CLIENTS_LIKE);
+
+            preparedStatement.setString(1, id);
+            preparedStatement.setString(2, mask + '%');
+            preparedStatement.setString(3, mask + '%');
+
+            ResultSet resultSet = preparedStatement.executeQuery();
+
+            while (resultSet.next()) {
+                String firstName = resultSet.getString(1);
+                String lastName = resultSet.getString(2);
+                clientsLikeMask.add(firstName + " " + lastName);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                if (preparedStatement != null) {
+                    preparedStatement.close();
+                }
+                connection.close();
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
+        return clientsLikeMask;
+    }
+
+    /**
+     * Метод проверяет наличие клиента в БД
+     *
+     * @param clientInitials массив состоящий из имени и фамилии клиента, наличие которого нужно проверять в базе
+     * @return ответ есть ли такой клиент в базе
+     */
+    public boolean isClientInDatabase(String[] clientInitials) {
+
+        boolean result = false;
+        String clientId = null;
+        String firstName = clientInitials[0];
+        String lastName = clientInitials[1];
+
+        logger.info("Checking client with" + clientInitials[0] + " " + clientInitials[1]);
+
+        Connection connection = ConnectionPool.getInstance().getConnection();
+        PreparedStatement preparedStatement = null;
+
+        logger.info("Connection got");
+
+        try {
+            preparedStatement = connection.prepareStatement(GET_ID_CLIENT_BY_NAME);
+
+            preparedStatement.setString(1, firstName);
+            preparedStatement.setString(2, lastName);
+
+            ResultSet resultSet = preparedStatement.executeQuery();
+
+            while (resultSet.next()) {
+                clientId = resultSet.getString(1);
+            }
+
+            if (clientId != null) {
+                result = true;
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                if (preparedStatement != null) {
+                    preparedStatement.close();
+                }
+                connection.close();
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
+        return result;
+    }
+
+    public String getIdByName(String[] clientInitials) {
+
+        String clientId = null;
+        String firstName = clientInitials[0];
+        String lastName = clientInitials[1];
+
+        logger.info("Checking client with" + clientInitials[0] + " " + clientInitials[1]);
+
+        Connection connection = ConnectionPool.getInstance().getConnection();
+        PreparedStatement preparedStatement = null;
+
+        logger.info("Connection got");
+
+        try {
+            preparedStatement = connection.prepareStatement(GET_ID_CLIENT_BY_NAME);
+
+            preparedStatement.setString(1, firstName);
+            preparedStatement.setString(2, lastName);
+
+            ResultSet resultSet = preparedStatement.executeQuery();
+
+            while (resultSet.next()) {
+                clientId = resultSet.getString(1);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                if (preparedStatement != null) {
+                    preparedStatement.close();
+                }
+                connection.close();
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
+        return clientId;
     }
 
     @Override

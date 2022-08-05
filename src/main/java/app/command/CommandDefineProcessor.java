@@ -40,9 +40,15 @@ public class CommandDefineProcessor {
             case CHANGE_PERIOD:
                 command = new ChangePeriodCommand();
                 break;
+            case ADVICE_REQUEST:
+                command = new AdviceRequestCommand();
+                break;
+            case ADD_NOTE:
+                command = new AddNoteCommand();
+                break;
             default:
                 command = new EmptyCommand();
-                throw new IllegalStateException("Unexpected value: " + currentCommand);
+                throw new IllegalStateException("Unexpected value: " + command);
         }
         return command;
     }

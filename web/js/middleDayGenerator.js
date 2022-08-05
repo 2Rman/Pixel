@@ -1,4 +1,4 @@
-function generateDay(dayData) {
+function generateDay(dayData, id) {
 
     console.log("dayGenerator is working")
 
@@ -70,6 +70,10 @@ function generateDay(dayData) {
     let greenButton = document.createElement("button");
     greenButton.classList.add("green", "button");
     greenButton.innerHTML = "Добавить запись";
+    genAddIncomePopup(id, dataIncomes[0]);
+    greenButton.onclick = function() {
+        showAddPopup("incomePopup");
+    }
     buttonPlaceInc.append(greenButton);
     // Конец первой таблицы
 
@@ -120,4 +124,5 @@ function generateDay(dayData) {
     redButton.classList.add("red", "button");
     redButton.innerHTML = "Добавить запись";
     buttonPlaceExp.append(redButton);
+
 }

@@ -11,6 +11,8 @@ public class ConstantCommand {
     public static final String CHANGE_PERIOD = "change_period";
     public static final String PREVIOUS = "previous";//---------------//
     public static final String NEXT = "next";
+    public static final String ADVICE_REQUEST = "advice_request";
+    public static final String ADD_NOTE = "add_note";
     public static final String ABOUT = "about";
     public static final String SETTINGS = "settings";
     public static final String SAVINGS = "savings";

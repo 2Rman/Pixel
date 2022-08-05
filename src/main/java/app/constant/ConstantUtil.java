@@ -12,5 +12,7 @@ public class ConstantUtil {
     public static final String PREVIOUS = "previous";
     public static final String NEXT = "next";
     public static final String CURRENT = "current";
+    public static final String INCOME = "income";
+    public static final String EXPENSE = "expense";
 
 }

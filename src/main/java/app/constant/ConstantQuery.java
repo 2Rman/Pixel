@@ -29,9 +29,19 @@ public class ConstantQuery {
     //language=sql GET_BY_ID
     public static final String GET_CLIENT_BY_ID = "SELECT * FROM client WHERE id_client = ?;";
 
-    //language=sql GET_BY_ID
+    //language=sql CREATE_CLIENT
     public static final String CREATE_CLIENT = "INSERT INTO client VALUES (?,?,?);";
 
+    //language=sql GET_CLIENTS_LIKE
+    public static final String GET_CLIENTS_LIKE = "select distinct first_name, last_name from client\n" +
+            "join income i on client.id_client = i.id_client\n" +
+            "join account a on i.id_account = a.id_account where a.id_account = ?\n" +
+            "and (first_name like ? or last_name like ?)";
+
+    //language=sql GET_CLIENT_BY_NAME
+    public static final String GET_ID_CLIENT_BY_NAME = "select id_client from client\n" +
+            "where first_name = ?\n" +
+            "and last_name = ?;";
 
     //-------------------------------------------------INCOME-----------------------------------------------------
     //language=sql GET_ALL

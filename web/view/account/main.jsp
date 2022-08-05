@@ -22,6 +22,7 @@
 </head>
 <body>
 
+
     <jsp:include page="../common/background_rectangles.jsp"/>
     <jsp:include page="../common/account_header.jsp"/>
     <div id="upperButtonsPlace">
