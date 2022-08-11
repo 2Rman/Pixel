@@ -78,7 +78,7 @@ public class ServiceTypeDAO implements AbstractDAO{
 
         logger.info("Getting service-type data by ID");
 
-        ServiceTypeEntity serviceTypeEntity = null;
+        ServiceTypeEntity typeEntity = null;
 
         Connection connection = ConnectionPool.getInstance().getConnection();
         PreparedStatement preparedStatement = null;
@@ -86,7 +86,7 @@ public class ServiceTypeDAO implements AbstractDAO{
         logger.info("Connection got");
 
         try {
-            preparedStatement = connection.prepareStatement(GET_EXPENSE_TYPE_BY_ID);
+            preparedStatement = connection.prepareStatement(GET_INCOME_BY_ID);
 
             preparedStatement.setString(1, id);
 
@@ -95,7 +95,7 @@ public class ServiceTypeDAO implements AbstractDAO{
             while (resultSet.next()) {
                 String idServiceType = resultSet.getString(1);
                 String serviceName = resultSet.getString(2);
-                serviceTypeEntity = new ServiceTypeEntity(idServiceType, serviceName);
+                typeEntity = new ServiceTypeEntity(idServiceType, serviceName);
 
             }
         } catch (SQLException e) {
@@ -110,7 +110,49 @@ public class ServiceTypeDAO implements AbstractDAO{
                 e.printStackTrace();
             }
         }
-        return serviceTypeEntity;
+        return typeEntity;
+    }
+
+    /**
+     * Метод для получения id типа прибыли по его названию (маникюр, педикюр и т.д.)
+     *
+     * @param serviceType имя (название) типа прибыли
+     * @return id типа записи в виде строки
+     */
+    public String getIdByName(String serviceType) {
+
+        logger.info("Getting ID by service name");
+
+        String serviceTypeId = null;
+
+        Connection connection = ConnectionPool.getInstance().getConnection();
+        PreparedStatement preparedStatement = null;
+
+        logger.info("Connection got");
+
+        try {
+            preparedStatement = connection.prepareStatement(GET_ID_SERVICE_TYPE_BY_NAME);
+
+            preparedStatement.setString(1, serviceType);
+
+            ResultSet resultSet = preparedStatement.executeQuery();
+
+            while (resultSet.next()) {
+                serviceTypeId = resultSet.getString(1);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                if (preparedStatement != null) {
+                    preparedStatement.close();
+                }
+                connection.close();
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
+        return serviceTypeId;
     }
 
     @Override

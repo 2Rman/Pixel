@@ -212,7 +212,7 @@ public class ClientDAO implements AbstractDAO<ClientEntity> {
         String firstName = clientInitials[0];
         String lastName = clientInitials[1];
 
-        logger.info("Checking client with" + clientInitials[0] + " " + clientInitials[1]);
+        logger.info("Checking client with " + clientInitials[0] + " " + clientInitials[1]);
 
         Connection connection = ConnectionPool.getInstance().getConnection();
         PreparedStatement preparedStatement = null;
@@ -246,6 +246,9 @@ public class ClientDAO implements AbstractDAO<ClientEntity> {
                 e.printStackTrace();
             }
         }
+
+        logger.info(result);
+
         return result;
     }
 
@@ -255,7 +258,7 @@ public class ClientDAO implements AbstractDAO<ClientEntity> {
         String firstName = clientInitials[0];
         String lastName = clientInitials[1];
 
-        logger.info("Checking client with" + clientInitials[0] + " " + clientInitials[1]);
+        logger.info("Searching id-client with " + clientInitials[0] + " " + clientInitials[1]);
 
         Connection connection = ConnectionPool.getInstance().getConnection();
         PreparedStatement preparedStatement = null;

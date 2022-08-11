@@ -77,6 +77,13 @@ public class ConstantQuery {
             "WHERE (id_account = ? AND (date BETWEEN ? AND ?))\n" +
             "ORDER BY date;";
 
+    //language=sql
+    public static final String GET_ID_SERVICE_TYPE_BY_NAME = "select id_service_type from service_type\n" +
+            "where service_name = ?";
+
+    //language=sql
+    public static final String INSERT_NEW_NOTE = "insert into income values (?,?,?,?,?,?,?)";
+
     //-----------------------------------------------SERVICE_TYPE---------------------------------------------------
     //language=sql GET_ALL
     public static final String GET_ALL_INCOME_TYPES = "SELECT distinct st.id_service_type, st.service_name " +

@@ -1,6 +1,9 @@
 package app.command;
 
 import app.dao.ClientDAO;
+import app.dao.IncomeDAO;
+import app.dao.ServiceTypeDAO;
+import app.entity.IncomeEntity;
 import org.apache.log4j.Logger;
 
 import javax.servlet.http.HttpServletRequest;
@@ -21,6 +24,10 @@ public class AddNoteCommand implements Command{
         logger.info("Adding new note");
 
         ClientDAO clientDAO = new ClientDAO();
+        ServiceTypeDAO serviceTypeDAO = new ServiceTypeDAO();
+        IncomeDAO incomeDAO = new IncomeDAO();
+        IncomeEntity incomeEntity;
+
         String userId = request.getParameter("userId");
         String date = request.getParameter("date");
         String noteType = request.getParameter("noteType");
@@ -37,7 +44,13 @@ public class AddNoteCommand implements Command{
             String[] splitInitials = castInitials(noteValue);
 
             if (clientDAO.isClientInDatabase(splitInitials)) {
-//            String clientId = clientDAO.getIdByName(splitInitials);
+                String idClient = clientDAO.getIdByName(splitInitials);
+                String idServiceType = serviceTypeDAO.getIdByName(noteDescription);
+
+                incomeEntity = new IncomeEntity(LocalDate.parse(date), idServiceType, Integer.valueOf(amount),
+                        idClient, userId, commentary);
+
+                incomeDAO.insertNote(incomeEntity);
             } else {
 
             }

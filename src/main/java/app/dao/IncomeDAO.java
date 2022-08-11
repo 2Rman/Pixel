@@ -271,6 +271,53 @@ public class IncomeDAO implements AbstractDAO {
         return incomeEntity;
     }
 
+    /**
+     * Метод для добавления в БД новой записи о доходе (произведенной процедуре)
+     *
+     * @param incomeEntity заполненная сущность "дохода" ("прибыли")
+     * @return успешно ли добавлена запись
+     */
+    public boolean insertNote(IncomeEntity incomeEntity) {
+
+        logger.info("Inserting new income-note");
+
+        Connection connection = ConnectionPool.getInstance().getConnection();
+        PreparedStatement preparedStatement = null;
+        boolean result = false;
+
+        logger.info("Connection got");
+
+        try {
+            preparedStatement = connection.prepareStatement(INSERT_NEW_NOTE);
+
+            preparedStatement.setString(1, incomeEntity.getId());
+            preparedStatement.setDate(2, Date.valueOf(incomeEntity.getDate()));
+            preparedStatement.setString(3, incomeEntity.getIdNoteType());
+            preparedStatement.setInt(4, incomeEntity.getAmount());
+            preparedStatement.setString(5, incomeEntity.getIdClient());
+            preparedStatement.setString(6, incomeEntity.getIdAccount());
+            preparedStatement.setString(7, incomeEntity.getCommentary());
+
+            int resultQuery = preparedStatement.executeUpdate();
+
+            if (resultQuery == 1) {
+                result = true;
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                if (preparedStatement != null) {
+                    preparedStatement.close();
+                }
+                connection.close();
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
+        return result;
+    }
+
     @Override
     public int create(Entity entity) {
         return 0;
