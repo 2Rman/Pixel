@@ -27,11 +27,10 @@ function showPeriodPopup() {
  * Добавление popup для внесения новой записи в БД
  *
  * @param id аккаунта
- * @param dateData дата дня, в котором должна быть создана новая запись
+ * @param date дата дня, в котором должна быть создана новая запись
  */
-function genAddIncomePopup(id, dateData) {
+function genAddIncomePopup(id, date) {
 
-    let date = dateData.date;
     let mainTable = document.getElementById("mainTablePlace");
     let incomePopup = document.createElement("dialog");
     incomePopup.id = "incomePopup";
@@ -67,7 +66,6 @@ function genAddIncomePopup(id, dateData) {
 
     //Добавление поля процедура
     let fieldNameT = document.createElement("p");
-    fieldNameT.id = "fieldName";
     fieldNameT.className = "fieldName";
     fieldNameT.innerText = "Процедура";
     form.append(fieldNameT);
@@ -78,6 +76,7 @@ function genAddIncomePopup(id, dateData) {
 
     //TODO выпадающий список исходя из наличия типов процедур мастера в БД
     let serviceTypeField = document.createElement("select");
+    serviceTypeField.id = "noteDescription";
     let opt1 = document.createElement("option");
     let opt2 = document.createElement("option");
     let opt3 = document.createElement("option");
@@ -143,8 +142,7 @@ function genAddIncomePopup(id, dateData) {
     //Обработка нажатия кнопки подтверждения (отправки формы)
 
     $(submitBut).click(function () {
-        console.log(dateData.date)
-        $("#incomePopup").hide();
+        incomePopup.classList.add("backdrop");
         $.ajax({
             url: '/pixel',
             type: 'get',
@@ -156,14 +154,16 @@ function genAddIncomePopup(id, dateData) {
                 date: date,
                 noteType: 'income',
                 noteValue: $("#clientField").val(),
-                noteDescription: $("#fieldName").val(),
+                noteDescription: $("#noteDescription option:selected").text(),
                 amount: $("#amountField").val(),
                 commentary: $("#commentField").val()
             },
             success(data) {
                 console.log("Sending done")
+                changePeriod("current", id, date, "day");
             }
         })
+        $("#incomePopup").remove();
     })
 
     //---Добавление скрытого списка с результатом запроса на сервер

@@ -70,7 +70,7 @@ function generateDay(dayData, id) {
     let greenButton = document.createElement("button");
     greenButton.classList.add("green", "button");
     greenButton.innerHTML = "Добавить запись";
-    genAddIncomePopup(id, dataIncomes[0]);
+    genAddIncomePopup(id, dayData[0].date);
     greenButton.onclick = function() {
         showAddPopup("incomePopup");
     }

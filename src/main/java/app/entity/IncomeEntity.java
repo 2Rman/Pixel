@@ -70,7 +70,7 @@ public class IncomeEntity extends Note {
         this.setId(String.valueOf(UUID.randomUUID()));
         this.setDate(date);
         this.setIdNoteType(idServiceType);
-        this.setAmount(amount);
+        this.setAmount(amount*HUNDRED);
         this.idClient = idClient;
         this.setIdAccount(idAccount);
         this.setCommentary(commentary);

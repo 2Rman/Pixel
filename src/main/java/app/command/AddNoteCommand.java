@@ -3,16 +3,24 @@ package app.command;
 import app.dao.ClientDAO;
 import app.dao.IncomeDAO;
 import app.dao.ServiceTypeDAO;
+import app.entity.ClientEntity;
 import app.entity.IncomeEntity;
+import app.util.RepresentationProcessor;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.json.JsonMapper;
+import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 import org.apache.log4j.Logger;
 
+import javax.print.DocFlavor;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 
-import static app.constant.ConstantUtil.EXPENSE;
-import static app.constant.ConstantUtil.INCOME;
+import static app.constant.ConstantAttribute.DAY;
+import static app.constant.ConstantUtil.*;
 
 public class AddNoteCommand implements Command{
 
@@ -27,6 +35,8 @@ public class AddNoteCommand implements Command{
         ServiceTypeDAO serviceTypeDAO = new ServiceTypeDAO();
         IncomeDAO incomeDAO = new IncomeDAO();
         IncomeEntity incomeEntity;
+        ClientEntity clientEntity;
+        String idClient;
 
         String userId = request.getParameter("userId");
         String date = request.getParameter("date");
@@ -36,6 +46,12 @@ public class AddNoteCommand implements Command{
         String amount = request.getParameter("amount");
         String commentary = request.getParameter("commentary");
 
+        String jsonRefDate;
+        String jsonPeriodData;
+        String jsonTotalData;
+        String[] commonData;
+        String jsonCommonData;
+
         if (noteType.equals(INCOME)) {
             //DO ONE
             logger.info("INCOME adding");
@@ -43,17 +59,23 @@ public class AddNoteCommand implements Command{
 
             String[] splitInitials = castInitials(noteValue);
 
-            if (clientDAO.isClientInDatabase(splitInitials)) {
-                String idClient = clientDAO.getIdByName(splitInitials);
-                String idServiceType = serviceTypeDAO.getIdByName(noteDescription);
+            if (!clientDAO.isClientInDatabase(splitInitials)) {
 
-                incomeEntity = new IncomeEntity(LocalDate.parse(date), idServiceType, Integer.valueOf(amount),
-                        idClient, userId, commentary);
+                logger.info("Client is missing in DB. ");
 
-                incomeDAO.insertNote(incomeEntity);
-            } else {
-
+                clientEntity = new ClientEntity(splitInitials[0].toUpperCase(), splitInitials[1].toUpperCase());
+                clientDAO.create(clientEntity);
             }
+
+            idClient = clientDAO.getIdByName(splitInitials);
+            String idServiceType = serviceTypeDAO.getIdByName(noteDescription);
+
+            logger.info(LocalDate.parse(date));
+
+            incomeEntity = new IncomeEntity(LocalDate.parse(date), idServiceType, Integer.parseInt(amount),
+                    idClient, userId, commentary);
+
+            incomeDAO.insertNote(incomeEntity);
 
         } else if (noteType.equals(EXPENSE)) {
             //DO TWO
@@ -62,7 +84,31 @@ public class AddNoteCommand implements Command{
             // DO NOTHING
             logger.info("NOTHING adding");
         }
-        return "done";
+        //СБОР ОБНОВЛЕННЫХ ДАННЫХ
+//        RepresentationProcessor representationProcessor = new RepresentationProcessor();
+//
+//        representationProcessor.collect(userId, CURRENT, LocalDate.parse(date), DAY);
+//
+//        ObjectMapper mapper = JsonMapper.builder().addModule(new JavaTimeModule()).build();
+//
+//        DateFormat df = new SimpleDateFormat("yyyy-MM-dd"); //Создание формата даты
+//        mapper.setDateFormat(df);                                  //Назначение формата mapper
+//
+//        jsonRefDate = mapper.writeValueAsString(representationProcessor.getPeriodData()[0].getDate());
+//        jsonPeriodData = mapper.writeValueAsString(representationProcessor.getPeriodData());
+//        jsonTotalData = mapper.writeValueAsString(representationProcessor.getTotalData().toList());
+//
+//        commonData = new String[]{jsonRefDate, jsonPeriodData, jsonTotalData};
+//        jsonCommonData = mapper.writeValueAsString(commonData);
+//
+//        logger.info(jsonRefDate);
+//        logger.info(jsonPeriodData);
+//        logger.info(jsonTotalData);
+//
+//        response.setCharacterEncoding("UTF-8");
+//        response.getWriter().write(jsonCommonData);
+
+        return "Insert procedure done";
     }
 
     /**

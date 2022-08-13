@@ -150,3 +150,8 @@ select>option {
     display: flex;
     justify-content: center;
 }
+
+.backdrop {
+    display: none;
+    z-index: -2 !important;
+}
