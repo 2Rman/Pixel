@@ -39,9 +39,20 @@ public class ConstantQuery {
             "and (first_name like ? or last_name like ?)";
 
     //language=sql GET_CLIENT_BY_NAME
-    public static final String GET_ID_CLIENT_BY_NAME = "select id_client from client\n" +
-            "where first_name = ?\n" +
-            "and last_name = ?;";
+    public static final String GET_ID_CLIENT_BY_NAME = "select distinct i.id_client from client\n" +
+            "join income i on client.id_client = i.id_client\n" +
+            "join account a on i.id_account = a.id_account\n" +
+            "where a.id_account = ?\n" +
+            "and first_name = ?\n" +
+            "and last_name = ?";
+
+    //language=sql GET_CLIENT_BY_NAME
+    public static final String GET_ID_CLIENT_BY_NAME_DIRECTLY = "select distinct id_client from client\n" +
+            "join income i on client.id_client = i.id_client\n" +
+            "join account a on i.id_account = a.id_account\n" +
+            "where a.id_account = ?\n" +
+            "and first_name = ?\n" +
+            "and last_name = ?";
 
     //-------------------------------------------------INCOME-----------------------------------------------------
     //language=sql GET_ALL
@@ -78,11 +89,7 @@ public class ConstantQuery {
             "ORDER BY date;";
 
     //language=sql
-    public static final String GET_ID_SERVICE_TYPE_BY_NAME = "select id_service_type from service_type\n" +
-            "where service_name = ?";
-
-    //language=sql
-    public static final String INSERT_NEW_NOTE = "insert into income values (?,?,?,?,?,?,?)";
+    public static final String INSERT_NEW_INCOME_NOTE = "insert into income values (?,?,?,?,?,?,?)";
 
     //-----------------------------------------------SERVICE_TYPE---------------------------------------------------
     //language=sql GET_ALL
@@ -94,6 +101,12 @@ public class ConstantQuery {
     //language=sql GET_BY_ID
     public static final String GET_SERVICE_TYPE_BY_ID = "SELECT * FROM service_type WHERE id_service_type = ?;";
 
+    //language=sql GET_ID_SERVICE_TYPE_BY_NAME
+    public static final String GET_ID_SERVICE_TYPE_BY_NAME = "select distinct service_type.id_service_type from service_type\n" +
+            "join income i on service_type.id_service_type = i.id_service_type\n" +
+            "join account a on i.id_account = a.id_account\n" +
+            "where a.id_account = ?\n" +
+            "and service_name = ?";
 
     //--------------------------------------------------EXPENSE----------------------------------------------------
     //language=sql GET_ALL
@@ -125,7 +138,13 @@ public class ConstantQuery {
             "WHERE (id_account = ? AND (date BETWEEN ? AND ?))\n" +
             "ORDER BY date;";
 
+    //language=sql INSERT_NEW_EXPENSE_NOTE
+    public static final String INSERT_NEW_EXPENSE_NOTE = "insert into expense values (?, ?, ?, ?, ?, ?)";
+
     //------------------------------------------------EXPENSE_TYPE--------------------------------------------------
+    //language=sql CREATE_EXPENSE_TYPE
+    public static final String CREATE_EXPENSE_TYPE = "insert into expense_type values (?, ?)";
+
     //language=sql GET_ALL
     public static final String GET_ALL_EXPENSE_TYPES = "SELECT distinct et.id_expense_type, et.expense_name " +
             "FROM expense_type et\n" +
@@ -134,5 +153,19 @@ public class ConstantQuery {
 
     //language=sql GET_BY_ID
     public static final String GET_EXPENSE_TYPE_BY_ID = "SELECT * FROM expense_type WHERE id_expense_type = ?;";
+
+    //language=sql GET_EXPENSES_LIKE
+    public static final String GET_EXPENSES_LIKE = "select distinct expense_name from expense_type\n" +
+            "join expense e on expense_type.id_expense_type = e.id_expense_type\n" +
+            "join account a on e.id_account = a.id_account\n" +
+            "where a.id_account = ?\n" +
+            "and expense_name LIKE ?";
+
+    //language=sql IS_EXPENSE_TYPE_IN_DB
+    public static final String GET_ID_EXPENSE_TYPE_BY_NAME = "select e.id_expense_type from expense_type\n" +
+            "join expense e on expense_type.id_expense_type = e.id_expense_type\n" +
+            "join account a on e.id_account = a.id_account\n" +
+            "where a.id_account = ?\n" +
+            "and expense_name = ?";
 
 }

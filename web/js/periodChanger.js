@@ -15,8 +15,11 @@ function changePeriod(direction, userId, refDate, period) {
             period: period
         },
         success: function(data) {
+            let mainTablePlace = document.getElementById("mainTablePlace");
+            while (mainTablePlace.firstChild) {
+                mainTablePlace.firstChild.remove()
+            }
             document.getElementById("commonMiddle").remove();
-            document.getElementById("middleTable").remove();
             document.getElementById("infoTable").remove();
 
             let parsedData = JSON.parse(data);

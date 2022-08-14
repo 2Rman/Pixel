@@ -3,6 +3,7 @@ package app.entity;
 import lombok.Data;
 
 import java.sql.Date;
+import java.time.LocalDate;
 import java.util.UUID;
 
 import static app.constant.ConstantUtil.HUNDRED;
@@ -51,16 +52,16 @@ public class ExpenseEntity extends Note {
      * Конструктор, использующийся для создания новой записи в БД
      *
      * @param date          дата, которой будет привязана запись
-     * @param idServiceType тип затраты
+     * @param idExpenseType тип затраты
      * @param amount        сумма затраты
      * @param idAccount     авторизованный аккаунт пользователя
      * @param commentary    комментарий к записи о затрате
      */
-    public ExpenseEntity(Date date, String idServiceType, int amount, String idAccount, String commentary) {
+    public ExpenseEntity(LocalDate date, String idExpenseType, int amount, String idAccount, String commentary) {
         this.setId(String.valueOf(UUID.randomUUID()));
-        this.setDate(date.toLocalDate());
-        this.setIdNoteType(idServiceType);
-        this.setAmount(amount);
+        this.setDate(date);
+        this.setIdNoteType(idExpenseType);
+        this.setAmount(amount*HUNDRED);
         this.setIdAccount(idAccount);
         this.setCommentary(commentary);
     }

@@ -3,7 +3,6 @@ package app.dao;
 import app.connection.ConnectionPool;
 import app.entity.Entity;
 import app.entity.ExpenseTypeEntity;
-import app.entity.ServiceTypeEntity;
 import org.apache.log4j.Logger;
 
 import java.sql.Connection;
@@ -117,6 +116,180 @@ public class ExpenseTypeDAO implements AbstractDAO {
     @Override
     public int create(Entity entity) {
         return 0;
+    }
+
+    /**
+     * Метод для получения типов расходов по "маске" для подсказок во время набора на стороне клиента
+     *
+     * @param id id-шник пользователя, у которого проверяем наличие вводимых типов расходов
+     * @param mask маска по которой производим поиск типов расходов в БД
+     * @return список найденных расходов по маске
+     */
+    public List<String> getLike(String id, String mask) {
+
+        logger.info("Getting expenses like " + mask);
+
+        List<String> expensesLikeMask = new ArrayList<>();
+
+        Connection connection = ConnectionPool.getInstance().getConnection();
+        PreparedStatement preparedStatement = null;
+
+        logger.info("Connection got");
+
+        try {
+            preparedStatement = connection.prepareStatement(GET_EXPENSES_LIKE);
+
+            preparedStatement.setString(1, id);
+            preparedStatement.setString(2, mask + '%');
+
+            ResultSet resultSet = preparedStatement.executeQuery();
+
+            while (resultSet.next()) {
+                String expenseName = resultSet.getString(1);
+                expensesLikeMask.add(expenseName);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                if (preparedStatement != null) {
+                    preparedStatement.close();
+                }
+                connection.close();
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
+        return expensesLikeMask;
+    }
+
+    /**
+     * Метод для проверки наличия конкретного названия расхода в БД
+     *
+     * @param expenseType название расхода
+     * @return ответ присутствует или отсутствует такое название расхода в БД
+     */
+    public boolean isExpenseTypeInDatabase(String userId, String expenseType) {
+
+        logger.info("Checking expense type with " + expenseType);
+
+        boolean result = false;
+        String expenseTypeId = null;
+
+        Connection connection = ConnectionPool.getInstance().getConnection();
+        PreparedStatement preparedStatement = null;
+
+        logger.info("Connection got");
+
+        try {
+            preparedStatement = connection.prepareStatement(GET_ID_EXPENSE_TYPE_BY_NAME);
+
+            preparedStatement.setString(1, userId);
+            preparedStatement.setString(2, expenseType);
+
+            ResultSet resultSet = preparedStatement.executeQuery();
+
+            while (resultSet.next()) {
+                expenseTypeId = resultSet.getString(1);
+            }
+
+            if (expenseTypeId != null) {
+                result = true;
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                if (preparedStatement != null) {
+                    preparedStatement.close();
+                }
+                connection.close();
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
+
+        logger.info(result);
+
+        return result;
+    }
+
+    /**
+     * Метод добавляет новый тип расходов в БД
+     *
+     * @param expenseTypeEntity заполненная сущность "Тип расходов"
+     * @return успешно ли выполнена операция
+     */
+    public int create(ExpenseTypeEntity expenseTypeEntity) {
+        //TODO разобраться почему не оверрайдится метод
+
+        logger.info("Creating new expense type");
+
+        int result = 0;
+        Connection connection = ConnectionPool.getInstance().getConnection();
+        PreparedStatement preparedStatement = null;
+
+        logger.info("Connection got");
+
+        try {
+
+            preparedStatement = connection.prepareStatement(CREATE_EXPENSE_TYPE);
+
+            preparedStatement.setString(1, expenseTypeEntity.getIdExpenseType());
+            preparedStatement.setString(2, expenseTypeEntity.getExpenseTypeName());
+
+            result = preparedStatement.executeUpdate();
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                if (preparedStatement != null) {
+                    preparedStatement.close();
+                }
+                connection.close();
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
+        return result;
+    }
+
+    public String getIdByName(String userId, String expenseTypeName) {
+
+        String expenseTypeId = null;
+
+        logger.info("Searching id-expense type with " + expenseTypeName);
+
+        Connection connection = ConnectionPool.getInstance().getConnection();
+        PreparedStatement preparedStatement = null;
+
+        logger.info("Connection got");
+
+        try {
+            preparedStatement = connection.prepareStatement(GET_ID_EXPENSE_TYPE_BY_NAME);
+
+            preparedStatement.setString(1, userId);
+            preparedStatement.setString(2, expenseTypeName);
+
+            ResultSet resultSet = preparedStatement.executeQuery();
+
+            while (resultSet.next()) {
+                expenseTypeId = resultSet.getString(1);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                if (preparedStatement != null) {
+                    preparedStatement.close();
+                }
+                connection.close();
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
+        return expenseTypeId;
     }
 
     @Override

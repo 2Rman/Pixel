@@ -5,6 +5,7 @@
 <html lang="en">
 <head>
     <title>Pixel</title>
+    <link rel="icon" href="../../image/favicon/favicon.ico">
     <link rel="stylesheet" type="text/css" href="../../css/manrope.css">
     <link rel="stylesheet" type="text/css" href="../../css/common/rectangle.css">
     <link rel="stylesheet" type="text/css" href="../../css/common/page.css">
@@ -44,6 +45,8 @@
 <script src="../../js/totalDataTableGenerator.js"></script>
 <script src="../../js/periodChanger.js"></script>
 <script src="../../js/middleDayGenerator.js"></script>
-<script src="../../js/dialogGenerator.js"></script>
+<script src="../../js/modalPeriod.js"></script>
+<script src="../../js/modalIncome.js"></script>
+<script src="../../js/modalExpense.js"></script>
 
 

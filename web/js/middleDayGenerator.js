@@ -6,7 +6,7 @@ function generateDay(dayData, id) {
     let dataExpenses = dayData[0]["expenseList"];
 
     //TEST
-    console.log(dayData);
+    console.log(dayData[0].date);
 
     //TEST end
 
@@ -123,6 +123,10 @@ function generateDay(dayData, id) {
     let redButton = document.createElement("button");
     redButton.classList.add("red", "button");
     redButton.innerHTML = "Добавить запись";
+    genAddExpensePopup(id, dayData[0].date);
+    redButton.onclick = function() {
+        showAddPopup("expensePopup");
+    }
     buttonPlaceExp.append(redButton);
 
 }

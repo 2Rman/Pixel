@@ -288,7 +288,7 @@ public class IncomeDAO implements AbstractDAO {
         logger.info("Connection got");
 
         try {
-            preparedStatement = connection.prepareStatement(INSERT_NEW_NOTE);
+            preparedStatement = connection.prepareStatement(INSERT_NEW_INCOME_NOTE);
 
             preparedStatement.setString(1, incomeEntity.getId());
             preparedStatement.setDate(2, Date.valueOf(incomeEntity.getDate()));

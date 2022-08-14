@@ -1,36 +1,12 @@
-function genPeriodPopup(userId, rDate) {
-
-    let mainTable = document.getElementById("commonMiddle");
-    let popup = document.createElement("dialog");
-    popup.id = "popup";
-    popup.className = "popup";
-
-    for (let c = 0; c < 4; c++) {
-        let periodBut = document.createElement("button");
-        periodBut.id = "period_" + c;
-        periodBut.className = "periodButton";
-        periodBut.innerText = PERIOD[c];
-        periodBut.onclick = function () {
-            document.querySelector("dialog").close();
-            changePeriod("current", userId, rDate, PERIOD_VAR[c]);
-        }
-        popup.append(periodBut);
-    }
-    mainTable.append(popup);
-}
-
-function showPeriodPopup() {
-    document.querySelector('dialog').showModal();
-}
-
 /**
- * Добавление popup для внесения новой записи в БД
+ * Добавление popup для внесения новой записи о доходе в БД
  *
  * @param id аккаунта
  * @param date дата дня, в котором должна быть создана новая запись
  */
 function genAddIncomePopup(id, date) {
 
+    console.log("INCOME")
     let mainTable = document.getElementById("mainTablePlace");
     let incomePopup = document.createElement("dialog");
     incomePopup.id = "incomePopup";
@@ -193,20 +169,14 @@ function genAddIncomePopup(id, date) {
                 mask: $("#clientField").val()
             },
             success(data) {
-                //TODO делаем генерацию поля, в котором будут находиться варианты
-                generateAdvices(data);
+                generateIncomeAdvices(data);
                 $("#adviceList").show();
             }
         })
     });
 }
 
-
-function showAddPopup(id) {
-    document.getElementById(id).showModal();
-}
-
-function generateAdvices(data) {
+function generateIncomeAdvices(data) {
     closeAllLists();
     let parsedData = JSON.parse(data)
     for (let i = 0; i < data.length; i++) {
@@ -218,7 +188,6 @@ function generateAdvices(data) {
             innerText.className = "adviceText";
             innerText.innerHTML = parsedData[i];
             innerElem.append(innerText);
-            console.log(innerText.textContent)
             $("#adviceList").append(innerElem);
             //Реакция на клик для каждого из элементов
             $("#adviceLine"+i).click(function () {
@@ -231,9 +200,5 @@ function generateAdvices(data) {
 
 function closeAllLists() {
     $("#adviceList>div").remove();
+    $("#adviceExpenseList>div").remove();
 }
-
-function setChosenAdvice() {
-
-}
-

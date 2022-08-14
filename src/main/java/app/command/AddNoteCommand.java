@@ -1,28 +1,21 @@
 package app.command;
 
-import app.dao.ClientDAO;
-import app.dao.IncomeDAO;
-import app.dao.ServiceTypeDAO;
+import app.dao.*;
 import app.entity.ClientEntity;
+import app.entity.ExpenseEntity;
+import app.entity.ExpenseTypeEntity;
 import app.entity.IncomeEntity;
-import app.util.RepresentationProcessor;
-import com.fasterxml.jackson.databind.ObjectMapper;
-import com.fasterxml.jackson.databind.json.JsonMapper;
-import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 import org.apache.log4j.Logger;
 
-import javax.print.DocFlavor;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 
-import static app.constant.ConstantAttribute.DAY;
-import static app.constant.ConstantUtil.*;
+import static app.constant.ConstantUtil.EXPENSE;
+import static app.constant.ConstantUtil.INCOME;
 
-public class AddNoteCommand implements Command{
+public class AddNoteCommand implements Command {
 
     Logger logger = Logger.getLogger(AddNoteCommand.class);
 
@@ -31,12 +24,17 @@ public class AddNoteCommand implements Command{
 
         logger.info("Adding new note");
 
+        ClientEntity clientEntity;
+        IncomeEntity incomeEntity;
+        ExpenseEntity expenseEntity;
+        IncomeDAO incomeDAO = new IncomeDAO();
+        ExpenseDAO expenseDAO = new ExpenseDAO();
         ClientDAO clientDAO = new ClientDAO();
         ServiceTypeDAO serviceTypeDAO = new ServiceTypeDAO();
-        IncomeDAO incomeDAO = new IncomeDAO();
-        IncomeEntity incomeEntity;
-        ClientEntity clientEntity;
+        ExpenseTypeDAO expenseTypeDAO = new ExpenseTypeDAO();
+
         String idClient;
+        String idExpenseType;
 
         String userId = request.getParameter("userId");
         String date = request.getParameter("date");
@@ -46,12 +44,6 @@ public class AddNoteCommand implements Command{
         String amount = request.getParameter("amount");
         String commentary = request.getParameter("commentary");
 
-        String jsonRefDate;
-        String jsonPeriodData;
-        String jsonTotalData;
-        String[] commonData;
-        String jsonCommonData;
-
         if (noteType.equals(INCOME)) {
             //DO ONE
             logger.info("INCOME adding");
@@ -59,18 +51,18 @@ public class AddNoteCommand implements Command{
 
             String[] splitInitials = castInitials(noteValue);
 
-            if (!clientDAO.isClientInDatabase(splitInitials)) {
+            if (!clientDAO.isClientInDatabase(userId, splitInitials)) {
 
-                logger.info("Client is missing in DB. ");
+                logger.info("Client missed in DB");
 
                 clientEntity = new ClientEntity(splitInitials[0].toUpperCase(), splitInitials[1].toUpperCase());
                 clientDAO.create(clientEntity);
+                idClient = clientEntity.getIdClient();
+            } else {
+                idClient = clientDAO.getIdByName(userId, splitInitials);
             }
 
-            idClient = clientDAO.getIdByName(splitInitials);
-            String idServiceType = serviceTypeDAO.getIdByName(noteDescription);
-
-            logger.info(LocalDate.parse(date));
+            String idServiceType = serviceTypeDAO.getIdByName(userId, noteDescription);
 
             incomeEntity = new IncomeEntity(LocalDate.parse(date), idServiceType, Integer.parseInt(amount),
                     idClient, userId, commentary);
@@ -80,33 +72,27 @@ public class AddNoteCommand implements Command{
         } else if (noteType.equals(EXPENSE)) {
             //DO TWO
             logger.info("EXPENSE adding");
+            logger.info("we're adding: " + userId + " " + date + " " + noteValue + " " + amount + " " + commentary);
+
+            if (!expenseTypeDAO.isExpenseTypeInDatabase(userId, noteValue.trim())) {
+
+                logger.info(noteValue + " is't in Database. Creating new expense-type");
+
+                ExpenseTypeEntity expenseTypeEntity = new ExpenseTypeEntity(noteValue.trim());
+                expenseTypeDAO.create(expenseTypeEntity);
+                idExpenseType = expenseTypeEntity.getIdExpenseType();
+            } else {
+                idExpenseType = expenseTypeDAO.getIdByName(userId, noteValue);
+            }
+
+            expenseEntity = new ExpenseEntity(LocalDate.parse(date), idExpenseType, Integer.parseInt(amount),
+                    userId, commentary);
+
+            expenseDAO.insertNote(expenseEntity);
         } else {
             // DO NOTHING
             logger.info("NOTHING adding");
         }
-        //СБОР ОБНОВЛЕННЫХ ДАННЫХ
-//        RepresentationProcessor representationProcessor = new RepresentationProcessor();
-//
-//        representationProcessor.collect(userId, CURRENT, LocalDate.parse(date), DAY);
-//
-//        ObjectMapper mapper = JsonMapper.builder().addModule(new JavaTimeModule()).build();
-//
-//        DateFormat df = new SimpleDateFormat("yyyy-MM-dd"); //Создание формата даты
-//        mapper.setDateFormat(df);                                  //Назначение формата mapper
-//
-//        jsonRefDate = mapper.writeValueAsString(representationProcessor.getPeriodData()[0].getDate());
-//        jsonPeriodData = mapper.writeValueAsString(representationProcessor.getPeriodData());
-//        jsonTotalData = mapper.writeValueAsString(representationProcessor.getTotalData().toList());
-//
-//        commonData = new String[]{jsonRefDate, jsonPeriodData, jsonTotalData};
-//        jsonCommonData = mapper.writeValueAsString(commonData);
-//
-//        logger.info(jsonRefDate);
-//        logger.info(jsonPeriodData);
-//        logger.info(jsonTotalData);
-//
-//        response.setCharacterEncoding("UTF-8");
-//        response.getWriter().write(jsonCommonData);
 
         return "Insert procedure done";
     }

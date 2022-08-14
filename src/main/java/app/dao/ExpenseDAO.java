@@ -23,7 +23,7 @@ public class ExpenseDAO implements AbstractDAO {
      * @param date дата для которой посылается запрос
      * @return список записей в заданную дату
      */
-    public List getDailyIncome(String id, LocalDate date) {
+    public List getDailyExpense(String id, LocalDate date) {
 
         logger.info("Getting current month expense data");
 
@@ -170,7 +170,7 @@ public class ExpenseDAO implements AbstractDAO {
     }
 
     /**
-     * Метод для получения конкретной записи из БД о доходе в виде id-шников
+     * Метод для получения конкретной записи из БД о доходе по id-шнику
      *
      * @param id конкретной записи в БД о доходе
      * @return сущность записи дохода, заполненную id-ключами других таблиц
@@ -264,6 +264,51 @@ public class ExpenseDAO implements AbstractDAO {
         return expenseEntity;
     }
 
+    /**
+     * Метод для создания новой записи о расходе
+     *
+     * @param expenseEntity заполненная сущность "Расход"
+     */
+    public boolean insertNote(ExpenseEntity expenseEntity) {
+
+        logger.info("Inserting new expense-note");
+
+        Connection connection = ConnectionPool.getInstance().getConnection();
+        PreparedStatement preparedStatement = null;
+        boolean result = false;
+
+        logger.info("Connection got");
+
+        try {
+            preparedStatement = connection.prepareStatement(INSERT_NEW_EXPENSE_NOTE);
+
+            preparedStatement.setString(1, expenseEntity.getId());
+            preparedStatement.setDate(2, Date.valueOf(expenseEntity.getDate()));
+            preparedStatement.setString(3, expenseEntity.getIdNoteType());
+            preparedStatement.setInt(4, expenseEntity.getAmount());
+            preparedStatement.setString(5, expenseEntity.getIdAccount());
+            preparedStatement.setString(6, expenseEntity.getCommentary());
+
+            int resultQuery = preparedStatement.executeUpdate();
+
+            if (resultQuery == 1) {
+                result = true;
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                if (preparedStatement != null) {
+                    preparedStatement.close();
+                }
+                connection.close();
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
+        return result;
+    }
+
     @Override
     public int create(Entity entity) {
         return 0;
@@ -278,4 +323,6 @@ public class ExpenseDAO implements AbstractDAO {
     public boolean delete(Entity entity) {
         return false;
     }
+
+
 }

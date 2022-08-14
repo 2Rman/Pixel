@@ -41,11 +41,13 @@
 
 .expensePopup {
     /*display: none;*/
+    height: 50% !important;
 }
 
 .formStyle {
     display: flex;
     flex-direction: column;
+    height: 100%;
 }
 
 .textField {
@@ -102,6 +104,7 @@ select>option {
     position: relative;
     width: 60%;
     height: 2.5em;
+    bottom: 0em;
     border-radius: 0.22em;
     background-color: white;
     border-collapse: collapse;

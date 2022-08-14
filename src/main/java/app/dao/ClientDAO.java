@@ -205,7 +205,7 @@ public class ClientDAO implements AbstractDAO<ClientEntity> {
      * @param clientInitials массив состоящий из имени и фамилии клиента, наличие которого нужно проверять в базе
      * @return ответ есть ли такой клиент в базе
      */
-    public boolean isClientInDatabase(String[] clientInitials) {
+    public boolean isClientInDatabase(String userId, String[] clientInitials) {
 
         boolean result = false;
         String clientId = null;
@@ -222,8 +222,9 @@ public class ClientDAO implements AbstractDAO<ClientEntity> {
         try {
             preparedStatement = connection.prepareStatement(GET_ID_CLIENT_BY_NAME);
 
-            preparedStatement.setString(1, firstName);
-            preparedStatement.setString(2, lastName);
+            preparedStatement.setString(1, userId);
+            preparedStatement.setString(2, firstName);
+            preparedStatement.setString(3, lastName);
 
             ResultSet resultSet = preparedStatement.executeQuery();
 
@@ -252,7 +253,7 @@ public class ClientDAO implements AbstractDAO<ClientEntity> {
         return result;
     }
 
-    public String getIdByName(String[] clientInitials) {
+    public String getIdByName(String userId, String[] clientInitials) {
 
         String clientId = null;
         String firstName = clientInitials[0];
@@ -268,8 +269,9 @@ public class ClientDAO implements AbstractDAO<ClientEntity> {
         try {
             preparedStatement = connection.prepareStatement(GET_ID_CLIENT_BY_NAME);
 
-            preparedStatement.setString(1, firstName);
-            preparedStatement.setString(2, lastName);
+            preparedStatement.setString(1, userId);
+            preparedStatement.setString(2, firstName);
+            preparedStatement.setString(3, lastName);
 
             ResultSet resultSet = preparedStatement.executeQuery();
 

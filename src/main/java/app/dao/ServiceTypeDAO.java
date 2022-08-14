@@ -119,7 +119,7 @@ public class ServiceTypeDAO implements AbstractDAO{
      * @param serviceType имя (название) типа прибыли
      * @return id типа записи в виде строки
      */
-    public String getIdByName(String serviceType) {
+    public String getIdByName(String userId, String serviceType) {
 
         logger.info("Getting ID by service name");
 
@@ -133,7 +133,8 @@ public class ServiceTypeDAO implements AbstractDAO{
         try {
             preparedStatement = connection.prepareStatement(GET_ID_SERVICE_TYPE_BY_NAME);
 
-            preparedStatement.setString(1, serviceType);
+            preparedStatement.setString(1, userId);
+            preparedStatement.setString(2, serviceType);
 
             ResultSet resultSet = preparedStatement.executeQuery();
 

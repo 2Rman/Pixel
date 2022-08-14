@@ -4,19 +4,33 @@ import lombok.Data;
 
 import java.util.UUID;
 
+/**
+ * Класс-сущность, реализующий "тип расхода" со всеми соответствующими полями
+ */
 @Data
-public class ExpenseTypeEntity extends Entity{
+public class ExpenseTypeEntity extends Entity {
 
-    private String idExpense;
-    private String expenseName;
+    private String idExpenseType;
+    private String expenseTypeName;
 
-    public ExpenseTypeEntity(String idExpense, String expenseName) {
-        this.idExpense = idExpense;
-        this.expenseName = expenseName;
+    /**
+     * Конструктор, создает сущность по известным id-типа расхода и названию типа расхода
+     *
+     * @param idExpenseType id типа расхода
+     * @param expenseTypeName название типа расхода
+     */
+    public ExpenseTypeEntity(String idExpenseType, String expenseTypeName) {
+        this.idExpenseType = idExpenseType;
+        this.expenseTypeName = expenseTypeName;
     }
 
-    public ExpenseTypeEntity(String expenseName) {
-        this.idExpense = String.valueOf(UUID.randomUUID());
-        this.expenseName = expenseName;
+    /**
+     * Конструктор, создает сущность типа расхода по названию с генерацией id
+     *
+     * @param expenseTypeName название типа расхода
+     */
+    public ExpenseTypeEntity(String expenseTypeName) {
+        this.idExpenseType = String.valueOf(UUID.randomUUID());
+        this.expenseTypeName = expenseTypeName;
     }
 }

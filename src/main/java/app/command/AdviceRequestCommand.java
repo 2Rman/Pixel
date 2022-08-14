@@ -1,6 +1,8 @@
 package app.command;
 
 import app.dao.ClientDAO;
+import app.dao.ExpenseDAO;
+import app.dao.ExpenseTypeDAO;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.json.JsonMapper;
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
@@ -44,9 +46,23 @@ public class AdviceRequestCommand implements Command{
             response.getWriter().write(jsonAdviceData);
 
             return jsonAdviceData;
+
         } else if (type.equals(EXPENSE)) {
-            //TODO доделать метод на затраты
-            return null;
+            List<String> resultExpenses;
+
+            ExpenseTypeDAO expenseTypeDAO = new ExpenseTypeDAO();
+
+            resultExpenses = expenseTypeDAO.getLike(userId, mask);
+
+            ObjectMapper mapper = JsonMapper.builder().addModule(new JavaTimeModule()).build();
+
+            jsonAdviceData = mapper.writeValueAsString(resultExpenses);
+
+            response.setCharacterEncoding("UTF-8");
+            response.getWriter().write(jsonAdviceData);
+
+            return jsonAdviceData;
+
         } else {
             return null;
         }
