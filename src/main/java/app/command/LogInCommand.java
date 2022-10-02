@@ -62,7 +62,7 @@ public class LogInCommand implements Command {
         //Делается запрос в БД, запускается по сути процедура построения таблиц
         //TEST
         //TODO ПРЕДПОЛОЖИМ, что это было получено со стороны клиента:
-        LocalDate testDate = LocalDate.of(2021, 3, 8);
+        LocalDate testDate = LocalDate.now();
         String testPeriod = MONTH;
         //КОНЦОВКА ТЕСТА
         //Получили, теперь считаем:

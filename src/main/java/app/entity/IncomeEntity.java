@@ -66,11 +66,12 @@ public class IncomeEntity extends Note {
      * @param idAccount id аккаунта авторизованного пользователя
      * @param commentary комментарий к записи
      */
-    public IncomeEntity(LocalDate date, String idServiceType, int amount, String idClient, String idAccount, String commentary) {
+    public IncomeEntity(LocalDate date, String idServiceType, String amount, String idClient, String idAccount, String commentary) {
         this.setId(String.valueOf(UUID.randomUUID()));
         this.setDate(date);
         this.setIdNoteType(idServiceType);
-        this.setAmount(amount*HUNDRED);
+        int amt = (int) Double.parseDouble(amount)*HUNDRED;
+        this.setAmount(amt);
         this.idClient = idClient;
         this.setIdAccount(idAccount);
         this.setCommentary(commentary);

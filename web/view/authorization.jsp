@@ -5,6 +5,7 @@
     <head>
         <meta charset="UTF-8">
         <title>Авторизация</title>
+        <link rel="icon" href="../image/favicon/favicon.ico">
         <link rel="stylesheet" type="text/css" href="../css/index.css">
         <link rel="stylesheet" type="text/css" href="../css/common/header.css">
         <link rel="stylesheet" type="text/css" href="../css/common/page.css">

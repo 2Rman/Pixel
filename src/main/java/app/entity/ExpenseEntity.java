@@ -57,11 +57,13 @@ public class ExpenseEntity extends Note {
      * @param idAccount     авторизованный аккаунт пользователя
      * @param commentary    комментарий к записи о затрате
      */
-    public ExpenseEntity(LocalDate date, String idExpenseType, int amount, String idAccount, String commentary) {
+    public ExpenseEntity(LocalDate date, String idExpenseType, String amount, String idAccount, String commentary) {
         this.setId(String.valueOf(UUID.randomUUID()));
         this.setDate(date);
         this.setIdNoteType(idExpenseType);
-        this.setAmount(amount*HUNDRED);
+        double amtD = Double.parseDouble(amount)*HUNDRED;
+        int amt = (int) amtD;
+        this.setAmount(amt);
         this.setIdAccount(idAccount);
         this.setCommentary(commentary);
     }

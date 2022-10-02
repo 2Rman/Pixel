@@ -64,7 +64,7 @@ public class AddNoteCommand implements Command {
 
             String idServiceType = serviceTypeDAO.getIdByName(userId, noteDescription);
 
-            incomeEntity = new IncomeEntity(LocalDate.parse(date), idServiceType, Integer.parseInt(amount),
+            incomeEntity = new IncomeEntity(LocalDate.parse(date), idServiceType, amount,
                     idClient, userId, commentary);
 
             incomeDAO.insertNote(incomeEntity);
@@ -85,7 +85,7 @@ public class AddNoteCommand implements Command {
                 idExpenseType = expenseTypeDAO.getIdByName(userId, noteValue);
             }
 
-            expenseEntity = new ExpenseEntity(LocalDate.parse(date), idExpenseType, Integer.parseInt(amount),
+            expenseEntity = new ExpenseEntity(LocalDate.parse(date), idExpenseType, amount,
                     userId, commentary);
 
             expenseDAO.insertNote(expenseEntity);

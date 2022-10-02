@@ -26,7 +26,6 @@
 
 .addPopup {
     width: 70%;
-    height: 60%;
     background-color: #ffececcc;
     border-radius: 1em;
     box-shadow: 0 0 0.5em #000000;
@@ -37,11 +36,13 @@
 
 .incomePopup {
     /*display: none;*/
+    height: 65em;
 }
 
 .expensePopup {
     /*display: none;*/
     height: 50% !important;
+    height: 60em;
 }
 
 .formStyle {

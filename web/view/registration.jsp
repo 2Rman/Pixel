@@ -5,6 +5,7 @@
 <head>
     <meta http-equiv="Content-Type" content="text/html" charset="UTF-8">
     <title>Регистрация</title>
+    <link rel="icon" href="../image/favicon/favicon.ico">
     <link rel="stylesheet" type="text/css" href="../css/index.css">
     <link rel="stylesheet" type="text/css" href="../css/common/header.css">
     <link rel="stylesheet" type="text/css" href="../css/common/page.css">

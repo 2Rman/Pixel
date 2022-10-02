@@ -4,6 +4,7 @@
 <html>
 <head>
     <meta charset="UTF-8">
+    <link rel="icon" href="../image/favicon/favicon.ico">
     <link rel="stylesheet" type="text/css" href="../css/index.css">
     <link rel="stylesheet" type="text/css" href="../css/common/page.css">
     <link rel="stylesheet" type="text/css" href="../css/common/header.css">
