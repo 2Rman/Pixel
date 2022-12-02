@@ -103,7 +103,8 @@ public class ExpenseDAO implements AbstractDAO {
                 String name = resultSet.getString(2);
                 int amount = resultSet.getInt(3);
                 String commentary = resultSet.getString(4);
-                expenseEntities.add(new ExpenseEntity(date, name, amount, commentary));
+                String idExpense = resultSet.getString(5);
+                expenseEntities.add(new ExpenseEntity(date, name, amount, commentary, idExpense));
 
             }
         } catch (SQLException e) {

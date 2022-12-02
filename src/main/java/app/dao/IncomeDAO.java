@@ -105,7 +105,8 @@ public class IncomeDAO implements AbstractDAO {
                 int amount = resultSet.getInt(3);
                 String name = resultSet.getString(4) + " " + resultSet.getString(5);
                 String commentary = resultSet.getString(6);
-                notes.add(new IncomeEntity(date, typeNote, amount, name, commentary));
+                String idIncome = resultSet.getString(7);
+                notes.add(new IncomeEntity(idIncome, date, typeNote, amount, name, commentary));
 
             }
         } catch (SQLException e) {

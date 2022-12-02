@@ -81,7 +81,7 @@ public class ConstantQuery {
             "WHERE (id_account = ? AND date = ? )";
 
     //language=sql
-    public static final String GET_PERIOD_INCOME = "SELECT date, service_name, amount, first_name, last_name, commentary " +
+    public static final String GET_PERIOD_INCOME = "SELECT date, service_name, amount, first_name, last_name, commentary, id_income " +
             "FROM income\n" +
             "LEFT JOIN client on income.id_client = client.id_client\n" +
             "LEFT JOIN service_type st on income.id_service_type = st.id_service_type\n" +
@@ -132,7 +132,7 @@ public class ConstantQuery {
             "WHERE (id_account = ? AND date = ? )";
 
     //language=sql
-    public static final String GET_PERIOD_EXPENSE = "SELECT date, expense_name, amount, commentary " +
+    public static final String GET_PERIOD_EXPENSE = "SELECT date, expense_name, amount, commentary, id_expense " +
             "FROM expense\n" +
             "LEFT JOIN expense_type ex on expense.id_expense_type = ex.id_expense_type\n" +
             "WHERE (id_account = ? AND (date BETWEEN ? AND ?))\n" +

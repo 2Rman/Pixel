@@ -76,4 +76,23 @@ public class IncomeEntity extends Note {
         this.setIdAccount(idAccount);
         this.setCommentary(commentary);
     }
+
+    /**
+     * Конструктор для создания сущности прибыли при запросе в БД перед передачей на страницу
+     *
+     * @param idIncome  id записи о доходе
+     * @param date      дата записи о доходе
+     * @param typeNote  тип дохода
+     * @param amount    сумма дохода
+     * @param name      имя клиента из текущей записи
+     * @param commentary    комментарий к записи
+     */
+    public IncomeEntity(String idIncome, Date date, String typeNote, int amount, String name, String commentary) {
+        this.setId(idIncome);
+        this.setDate(date.toLocalDate());
+        this.setNoteType(typeNote);
+        this.setAmount(amount/HUNDRED);
+        this.setClient(name);
+        this.setCommentary(commentary);
+    }
 }

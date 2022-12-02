@@ -67,4 +67,21 @@ public class ExpenseEntity extends Note {
         this.setIdAccount(idAccount);
         this.setCommentary(commentary);
     }
+
+    /**
+     * Конструктор для создания сущности "расхода" перед передачей на фронт
+     *
+     * @param date     дата принятой затраты
+     * @param typeNote тип затраты
+     * @param amount   сумма затраты
+     * @param comment  комментарий к затрате
+     * @param idExpense id сущности расхода из БД
+     */
+    public ExpenseEntity(Date date, String typeNote, int amount, String comment, String idExpense) {
+        this.setDate(date.toLocalDate());
+        this.setNoteType(typeNote);
+        this.setAmount(amount/HUNDRED);
+        this.setCommentary(comment);
+        this.setId(idExpense);
+    }
 }
